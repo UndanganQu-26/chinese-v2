@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.clearTimeout(loaderTimer);
   }
 
-  const loaderTimer = window.setTimeout(hideLoader, reduceMotion ? 150 : 3350);
+  const loaderTimer = window.setTimeout(hideLoader, reduceMotion ? 150 : 4150);
 
   if (loader) {
     loader.addEventListener('click', hideLoader);
