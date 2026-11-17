@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.clearTimeout(loaderTimer);
   }
 
-  const loaderTimer = window.setTimeout(hideLoader, reduceMotion ? 150 : 3450);
+  const loaderTimer = window.setTimeout(hideLoader, reduceMotion ? 150 : 3350);
 
   if (loader) {
     loader.addEventListener('click', hideLoader);
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (wrap.childElementCount >= MAX_PETALS || document.hidden) return;
       const petal = document.createElement('span');
       petal.className = 'petal';
-      const size = 8 + Math.random() * 7;
+      const size = 7 + Math.random() * 6;
       petal.style.setProperty('--s', size.toFixed(1) + 'px');
       petal.style.left = (Math.random() * 100).toFixed(2) + 'vw';
       petal.style.setProperty('--dx', (Math.random() * 34 - 17).toFixed(1) + 'vw');
