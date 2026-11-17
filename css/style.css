@@ -257,20 +257,26 @@ button {
 
 .ld7-tree-a { top: -3vh; left: -4vw; width: min(58vw, 66vh); height: auto;
   transform-origin: 0% 0%;
-  animation: ld7BrIn 1.7s 1s ease both, ld7SwayA 12s 2.9s ease-in-out infinite alternate; }
+  animation: ld7BrInL 1.1s .35s cubic-bezier(.22,.61,.36,1) both, ld7SwayA 12s 2.9s ease-in-out infinite alternate; }
 .ld7-tree-b { top: -3vh; right: -4vw; width: min(50vw, 52vh); height: auto;
   transform-origin: 100% 0%;
-  animation: ld7BrIn 1.8s 1.15s ease both, ld7SwayB 13.5s 3s ease-in-out infinite alternate; }
+  animation: ld7BrInR 1.1s .4s cubic-bezier(.22,.61,.36,1) both, ld7SwayB 13.5s 3s ease-in-out infinite alternate; }
 .ld7-tree-c { bottom: -1vh; left: -4vw; width: min(40vw, 34vh); height: auto;
   transform-origin: 0% 100%;
-  animation: ld7BrIn 1.6s 1.3s ease both, ld7SwayC 10.5s 3.15s ease-in-out infinite alternate; }
+  animation: ld7BrInL 1.15s .55s cubic-bezier(.22,.61,.36,1) both, ld7SwayC 10.5s 3.15s ease-in-out infinite alternate; }
 .ld7-tree-d { bottom: -1vh; right: -4vw; width: min(36vw, 27vh); height: auto;
   transform-origin: 100% 100%;
-  animation: ld7BrIn 1.6s 1.45s ease both, ld7SwayD 9.5s 3.3s ease-in-out infinite alternate; }
+  animation: ld7BrInR 1.15s .6s cubic-bezier(.22,.61,.36,1) both, ld7SwayD 9.5s 3.3s ease-in-out infinite alternate; }
 
-@keyframes ld7BrIn {
-  from { opacity: 0; transform: scale(.94); }
-  to   { opacity: 1; transform: scale(1); }
+/* dahan "membuka": masuk dari sisi kiri / kanan sambil mengembang dari sudut */
+@keyframes ld7BrInL {
+  from { opacity: 0; transform: translate3d(-14vw, 0, 0) scale(.72) rotate(-2.5deg); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+}
+
+@keyframes ld7BrInR {
+  from { opacity: 0; transform: translate3d(14vw, 0, 0) scale(.72) rotate(2.5deg); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
 }
 
 @keyframes ld7SwayA { from { transform: rotate(0deg); } to { transform: rotate(-1.05deg); } }
