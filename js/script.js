@@ -1,10 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add('js');
 
-  /* ========== LOADER — NAGA ========== */
-  setTimeout(() => {
-    const loader = document.getElementById('loader');
+  /* ========== LOADER — PEMBUKAAN ========== */
+  const loader = document.getElementById('loader');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let loaderHidden = false;
+
+  function hideLoader() {
+    if (loaderHidden) return;
+    loaderHidden = true;
     if (loader) loader.classList.add('hidden');
-  }, 2700);
+    document.body.classList.add('loader-done');
+    window.clearTimeout(loaderTimer);
+  }
+
+  const loaderTimer = window.setTimeout(hideLoader, reduceMotion ? 150 : 3450);
+
+  if (loader) {
+    loader.addEventListener('click', hideLoader);
+    loader.addEventListener('touchend', hideLoader, { passive: true });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') hideLoader();
+    });
+  }
 
   /* ========== PERSONALIZE GUEST NAME ========== */
   (function personalizeGuest() {
@@ -66,6 +84,34 @@ document.addEventListener('DOMContentLoaded', () => {
       container.appendChild(spark);
       setTimeout(() => spark.remove(), 14000);
     }, 420);
+  })();
+
+  /* ========== KELOPAK SAKURA BERJATUH ========== */
+  (function createPetals() {
+    const wrap = document.getElementById('cnPetals');
+    if (!wrap || reduceMotion) return;
+    const MAX_PETALS = 22;
+
+    function spawnPetal() {
+      if (wrap.childElementCount >= MAX_PETALS || document.hidden) return;
+      const petal = document.createElement('span');
+      petal.className = 'petal';
+      const size = 9 + Math.random() * 9;
+      petal.style.setProperty('--s', size.toFixed(1) + 'px');
+      petal.style.left = (Math.random() * 100).toFixed(2) + 'vw';
+      petal.style.setProperty('--dx', (Math.random() * 34 - 17).toFixed(1) + 'vw');
+      petal.style.setProperty('--sway', (Math.random() * 60 + 45).toFixed(0) + 'px');
+      petal.style.setProperty('--dur', (9 + Math.random() * 6).toFixed(1) + 's');
+      petal.style.setProperty('--rot', (Math.random() * 360).toFixed(0) + 'deg');
+      petal.style.setProperty('--o', (0.55 + Math.random() * 0.4).toFixed(2));
+      wrap.appendChild(petal);
+      window.setTimeout(() => petal.remove(), 16500);
+    }
+
+    window.setInterval(spawnPetal, 640);
+    for (let i = 0; i < 9; i++) {
+      window.setTimeout(spawnPetal, i * 280);
+    }
   })();
 
   /* ========== NAVBAR ========== */

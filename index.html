@@ -11,56 +11,74 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- ============ LOADER : NAGA ============ -->
-  <div id="loader">
-    <div class="loader-inner">
-      <div class="loader-seal">囍</div>
-      <svg class="loader-dragon" viewBox="0 0 240 170" fill="none" aria-hidden="true">
+  <!-- ============ LOADER : PEMBUKAAN 山水 ============ -->
+  <div id="loader" role="status" aria-label="Memuat undangan">
+    <div class="loader-scene" aria-hidden="true">
+      <div class="loader-moon"></div>
+      <svg class="loader-ridge loader-ridge--far" viewBox="0 0 1600 420" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
         <defs>
-          <linearGradient id="dragonGold" x1="0" y1="0" x2="240" y2="170" gradientUnits="userSpaceOnUse">
-            <stop offset="0" stop-color="#F4DFA0"/>
-            <stop offset=".5" stop-color="#E6C36A"/>
-            <stop offset="1" stop-color="#C89B3C"/>
+          <linearGradient id="ridgeFarLoader" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#6E3B47"/>
+            <stop offset=".55" stop-color="#452530"/>
+            <stop offset="1" stop-color="#311720"/>
           </linearGradient>
         </defs>
-        <g stroke="url(#dragonGold)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-          <!-- kepala naga -->
-          <path pathLength="1" d="M58 80 C 64 64, 82 55, 104 55 C 128 55, 143 66, 147 79"/>
-          <path pathLength="1" d="M147 79 C 151 87, 149 95, 141 99"/>
-          <path pathLength="1" d="M141 99 C 132 105, 118 107, 108 103"/>
-          <path pathLength="1" d="M108 103 C 96 101, 85 95, 78 88"/>
-          <!-- mata & alis -->
-          <path pathLength="1" d="M99 74 C 104 69, 113 69, 118 75"/>
-          <path pathLength="1" d="M106 76 C 108 74, 111 74, 113 76"/>
-          <!-- tanduk -->
-          <path pathLength="1" d="M97 57 C 93 43, 99 29, 113 25"/>
-          <path pathLength="1" d="M106 39 C 112 36, 118 40, 120 46"/>
-          <path pathLength="1" d="M81 61 C 74 50, 78 37, 90 31"/>
-          <!-- telinga / surai -->
-          <path pathLength="1" d="M74 68 C 58 60, 44 62, 35 72 C 46 72, 53 78, 55 87"/>
-          <path pathLength="1" d="M76 84 C 64 84, 54 92, 51 103 C 60 98, 68 98, 74 102"/>
-          <!-- kumis -->
-          <path pathLength="1" d="M149 85 C 169 82, 187 89, 197 103 C 201 109, 199 117, 191 119"/>
-          <path pathLength="1" d="M146 93 C 162 97, 172 107, 172 119 C 172 127, 164 131, 158 127"/>
-          <!-- jenggot -->
-          <path pathLength="1" d="M112 105 C 110 117, 102 125, 92 128"/>
-          <!-- leher & badan melengkung -->
-          <path pathLength="1" d="M78 88 C 68 96, 61 108, 63 122 C 65 135, 78 141, 90 137"/>
-          <path pathLength="1" d="M63 122 C 50 118, 41 107, 44 93 C 46 83, 55 78, 63 81"/>
-          <!-- sisik leher -->
-          <path pathLength="1" d="M75 96 C 80 100, 87 101, 93 99"/>
-          <path pathLength="1" d="M71 110 C 77 114, 84 115, 91 113"/>
-          <!-- kaki cakar -->
-          <path pathLength="1" d="M86 134 C 90 142, 88 150, 82 154"/>
-          <path pathLength="1" d="M92 132 C 98 138, 100 146, 96 152"/>
-        </g>
-        <circle class="dragon-eye" cx="108" cy="77" r="3" fill="#E6C36A"/>
+        <path fill="url(#ridgeFarLoader)" d="M0 302 C 65 292, 105 268, 158 258 C 214 248, 238 302, 302 290 C 352 281, 382 234, 442 218 C 500 203, 524 264, 588 270 C 644 275, 668 226, 732 211 C 800 196, 832 270, 906 263 C 962 258, 990 237, 1050 227 C 1114 216, 1138 277, 1204 282 C 1270 287, 1294 241, 1364 241 C 1424 241, 1462 288, 1522 292 C 1560 295, 1584 282, 1600 274 L 1600 420 L 0 420 Z"/>
       </svg>
-      <div class="loader-text">
-        <span class="loader-cn">龍鳳呈祥</span>
-        <span class="loader-en">Double Happiness</span>
+      <div class="loader-mist"></div>
+      <svg class="loader-ridge loader-ridge--near" viewBox="0 0 1600 380" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="ridgeNearLoader" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#3F1620"/>
+            <stop offset=".6" stop-color="#2C1017"/>
+            <stop offset="1" stop-color="#1F090F"/>
+          </linearGradient>
+        </defs>
+        <path fill="url(#ridgeNearLoader)" d="M0 326 C 70 296, 122 246, 188 230 C 248 216, 284 302, 352 303 C 402 304, 428 228, 498 204 C 560 183, 594 288, 672 293 C 737 297, 768 249, 842 239 C 906 230, 936 300, 1012 300 C 1072 300, 1098 216, 1172 197 C 1238 180, 1272 290, 1352 298 C 1412 304, 1456 264, 1522 267 C 1562 269, 1584 282, 1600 288 L 1600 380 L 0 380 Z"/>
+      </svg>
+    </div>
+    <div class="loader-clouds" aria-hidden="true">
+      <span class="loader-cloud" style="top:10%; --size:210px; --dur:36s; --delay:-8s"></span>
+      <span class="loader-cloud" style="top:24%; --size:140px; --dur:46s; --delay:-22s"></span>
+      <span class="loader-cloud" style="top:66%; --size:170px; --dur:41s; --delay:-14s"></span>
+    </div>
+
+    <div class="loader-stage" aria-hidden="true">
+      <svg class="loader-oval" viewBox="0 0 540 360" fill="none">
+        <defs>
+          <linearGradient id="goldFrame" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#F9ECC0"/>
+            <stop offset=".3" stop-color="#E4C56E"/>
+            <stop offset=".55" stop-color="#9A7428"/>
+            <stop offset=".8" stop-color="#E9CE8F"/>
+            <stop offset="1" stop-color="#7C5B18"/>
+          </linearGradient>
+        </defs>
+        <ellipse cx="270" cy="180" rx="238" ry="152" stroke="url(#goldFrame)" stroke-width="11"/>
+        <ellipse cx="270" cy="180" rx="238" ry="152" stroke="#31200A" stroke-opacity=".6" stroke-width="1.3"/>
+        <ellipse cx="270" cy="180" rx="221" ry="135" stroke="#F4DFA0" stroke-opacity=".9" stroke-width="1.4"/>
+        <ellipse class="loader-bead" cx="270" cy="180" rx="229.5" ry="143.5" stroke="#F4DFA0" stroke-opacity=".38" stroke-width="5" stroke-linecap="round" stroke-dasharray="0.6 9.5"/>
+        <path d="M228 33 Q270 11 312 33 Q270 24 228 33 Z" fill="url(#goldFrame)"/>
+        <path d="M228 327 Q270 349 312 327 Q270 336 228 327 Z" fill="url(#goldFrame)"/>
+        <g fill="#F4DFA0" stroke="#8A6A1F" stroke-width="1.1">
+          <circle cx="270" cy="31" r="4.4"/>
+          <circle cx="270" cy="329" r="4.4"/>
+          <circle cx="32" cy="180" r="4.4"/>
+          <circle cx="508" cy="180" r="4.4"/>
+        </g>
+      </svg>
+      <div class="loader-inner-frame">
+        <div class="loader-mini-seal"><span>囍</span></div>
+        <p class="loader-kicker">The Wedding of</p>
+        <p class="loader-names">Ahmad <em>&amp;</em> Aisyah</p>
+        <p class="loader-divider"><i></i>囍<i></i></p>
+        <p class="loader-date">00 . 00 . 0000</p>
       </div>
+    </div>
+
+    <div class="loader-bottom">
       <div class="loader-bar"><span></span></div>
+      <p class="loader-hint">Ketuk untuk Melewati</p>
     </div>
   </div>
 
@@ -86,10 +104,79 @@
     </div>
   </nav>
 
-  <!-- ============ BACKGROUND LIVE : PARALLAX TEMA CHINA ============ -->
+  <!-- ============ BACKGROUND LIVE : PEMANDANGAN TINTA + PARALLAX ============ -->
   <div class="cn-bg" id="cnBg" aria-hidden="true">
-    <div class="cn-layer cn-layer--far" data-depth="0.10"></div>
-    <div class="cn-layer cn-layer--mid" data-depth="0.20">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs>
+        <radialGradient id="bloomGrad" cx="50%" cy="42%" r="62%">
+          <stop offset="0" stop-color="#EFAAB6"/>
+          <stop offset=".55" stop-color="#D4788C"/>
+          <stop offset="1" stop-color="#A9576C"/>
+        </radialGradient>
+        <g id="cn-bloom">
+          <ellipse rx="6.4" ry="10.2" transform="rotate(0) translate(0 -6.2)" fill="url(#bloomGrad)" stroke="#F5CDD3" stroke-width=".7" stroke-opacity=".8"/>
+          <ellipse rx="6.4" ry="10.2" transform="rotate(72) translate(0 -6.2)" fill="url(#bloomGrad)" stroke="#F5CDD3" stroke-width=".7" stroke-opacity=".8"/>
+          <ellipse rx="6.4" ry="10.2" transform="rotate(144) translate(0 -6.2)" fill="url(#bloomGrad)" stroke="#F5CDD3" stroke-width=".7" stroke-opacity=".8"/>
+          <ellipse rx="6.4" ry="10.2" transform="rotate(216) translate(0 -6.2)" fill="url(#bloomGrad)" stroke="#F5CDD3" stroke-width=".7" stroke-opacity=".8"/>
+          <ellipse rx="6.4" ry="10.2" transform="rotate(288) translate(0 -6.2)" fill="url(#bloomGrad)" stroke="#F5CDD3" stroke-width=".7" stroke-opacity=".8"/>
+          <circle r="2.9" fill="#F8E7C6"/>
+          <circle cx="-4.6" cy="0" r=".75" fill="#F8E7C6"/>
+          <circle cx="4.6" cy="0" r=".75" fill="#F8E7C6"/>
+          <circle cx="0" cy="-4.6" r=".75" fill="#F8E7C6"/>
+          <circle cx="0" cy="4.6" r=".75" fill="#F8E7C6"/>
+        </g>
+        <symbol id="cn-pagoda" viewBox="0 0 240 268">
+          <g fill="currentColor">
+            <rect x="117" y="14" width="6" height="34"/>
+            <circle cx="120" cy="9" r="5"/>
+            <circle cx="120" cy="23" r="2.7"/>
+            <path d="M100 46 Q120 62 140 46 Q120 55 100 46 Z"/>
+            <rect x="106" y="52" width="28" height="13"/>
+            <path d="M86 84 Q120 104 154 84 Q120 95 86 84 Z"/>
+            <path d="M86 84 L74 72 L92 81 Z"/>
+            <path d="M154 84 L166 72 L148 81 Z"/>
+            <rect x="94" y="92" width="52" height="16"/>
+            <path d="M70 132 Q120 156 170 132 Q120 147 70 132 Z"/>
+            <path d="M70 132 L58 119 L77 128 Z"/>
+            <path d="M170 132 L182 119 L163 128 Z"/>
+            <rect x="82" y="144" width="76" height="20"/>
+            <path d="M50 190 Q120 220 190 190 Q120 207 50 190 Z"/>
+            <path d="M50 190 L37 175 L58 185 Z"/>
+            <path d="M190 190 L203 175 L182 185 Z"/>
+            <rect x="64" y="207" width="112" height="38"/>
+            <rect x="54" y="245" width="132" height="12"/>
+          </g>
+          <rect x="109" y="218" width="22" height="27" fill="#0A0305"/>
+        </symbol>
+      </defs>
+    </svg>
+
+    <div class="cn-layer cn-layer--far" data-depth="0.07">
+      <div class="cn-moon"></div>
+      <svg class="cn-ridge cn-ridge--far" viewBox="0 0 1600 420" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="ridgeFarBg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#582430"/>
+            <stop offset="1" stop-color="#31131B"/>
+          </linearGradient>
+        </defs>
+        <path fill="url(#ridgeFarBg)" d="M0 302 C 65 292, 105 268, 158 258 C 214 248, 238 302, 302 290 C 352 281, 382 234, 442 218 C 500 203, 524 264, 588 270 C 644 275, 668 226, 732 211 C 800 196, 832 270, 906 263 C 962 258, 990 237, 1050 227 C 1114 216, 1138 277, 1204 282 C 1270 287, 1294 241, 1364 241 C 1424 241, 1462 288, 1522 292 C 1560 295, 1584 282, 1600 274 L 1600 420 L 0 420 Z"/>
+      </svg>
+    </div>
+    <div class="cn-layer cn-layer--ridge" data-depth="0.15">
+      <svg class="cn-ridge cn-ridge--near" viewBox="0 0 1600 380" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="ridgeNearBg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#3E1520"/>
+            <stop offset="1" stop-color="#210C12"/>
+          </linearGradient>
+        </defs>
+        <path fill="url(#ridgeNearBg)" d="M0 326 C 70 296, 122 246, 188 230 C 248 216, 284 302, 352 303 C 402 304, 428 228, 498 204 C 560 183, 594 288, 672 293 C 737 297, 768 249, 842 239 C 906 230, 936 300, 1012 300 C 1072 300, 1098 216, 1172 197 C 1238 180, 1272 290, 1352 298 C 1412 304, 1456 264, 1522 267 C 1562 269, 1584 282, 1600 288 L 1600 380 L 0 380 Z"/>
+      </svg>
+    </div>
+    <div class="cn-layer cn-layer--mid" data-depth="0.22">
+      <svg class="cn-pagoda cn-pagoda--left" viewBox="0 0 240 268" aria-hidden="true"><use href="#cn-pagoda"/></svg>
+      <svg class="cn-pagoda cn-pagoda--right" viewBox="0 0 240 268" aria-hidden="true"><use href="#cn-pagoda"/></svg>
       <svg class="cn-dragon cn-dragon--1" viewBox="0 0 240 170" fill="none">
         <g stroke="#E6C36A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
           <path d="M58 80 C 64 64, 82 55, 104 55 C 128 55, 143 66, 147 79"/>
@@ -119,7 +206,60 @@
       <div class="cn-glyph cn-glyph--1">囍</div>
       <div class="cn-glyph cn-glyph--2">福</div>
     </div>
-    <div class="cn-layer cn-layer--near" data-depth="0.32">
+    <div class="cn-layer cn-layer--near" data-depth="0.34">
+      <svg class="cn-branch cn-branch--left" viewBox="0 0 380 320" fill="none" aria-hidden="true">
+        <g stroke="#1E0C12" stroke-linecap="round">
+          <path d="M-14 20 C 62 34, 128 74, 166 134 C 194 181, 208 232, 212 300" stroke-width="13"/>
+          <path d="M-14 20 C 62 34, 128 74, 166 134" stroke-width="13" stroke-opacity=".35" stroke="#3A1B22" transform="translate(3 3)"/>
+          <path d="M78 46 C 116 44, 150 26, 192 2" stroke-width="7"/>
+          <path d="M140 96 C 176 90, 214 104, 250 140" stroke-width="6"/>
+          <path d="M110 66 C 118 40, 140 22, 168 12" stroke-width="4"/>
+        </g>
+        <g>
+          <use href="#cn-bloom" transform="translate(192 6) rotate(18) scale(1.15)"/>
+          <use href="#cn-bloom" transform="translate(158 22) rotate(-24) scale(.9)"/>
+          <use href="#cn-bloom" transform="translate(116 46) rotate(40) scale(1.05)"/>
+          <use href="#cn-bloom" transform="translate(84 44) rotate(-14) scale(.8)"/>
+          <use href="#cn-bloom" transform="translate(172 116) rotate(8) scale(1.2)"/>
+          <use href="#cn-bloom" transform="translate(148 158) rotate(-34) scale(.95)"/>
+          <use href="#cn-bloom" transform="translate(238 134) rotate(30) scale(1.1)"/>
+          <use href="#cn-bloom" transform="translate(214 196) rotate(-16) scale(.85)"/>
+          <use href="#cn-bloom" transform="translate(110 74) rotate(58) scale(.7)"/>
+        </g>
+        <g fill="#B45E73">
+          <circle cx="140" cy="34" r="3.6"/>
+          <circle cx="196" cy="60" r="3.1"/>
+          <circle cx="258" cy="158" r="3.4"/>
+          <circle cx="186" cy="152" r="3"/>
+        </g>
+      </svg>
+      <svg class="cn-branch cn-branch--right" viewBox="0 0 380 320" fill="none" aria-hidden="true">
+        <g transform="translate(380 0) scale(-1 1)">
+          <g stroke="#1E0C12" stroke-linecap="round">
+            <path d="M-14 20 C 62 34, 128 74, 166 134 C 194 181, 208 232, 212 300" stroke-width="13"/>
+            <path d="M78 46 C 116 44, 150 26, 192 2" stroke-width="7"/>
+            <path d="M140 96 C 176 90, 214 104, 250 140" stroke-width="6"/>
+            <path d="M110 66 C 118 40, 140 22, 168 12" stroke-width="4"/>
+          </g>
+          <g>
+            <use href="#cn-bloom" transform="translate(192 6) rotate(18) scale(1.15)"/>
+            <use href="#cn-bloom" transform="translate(158 22) rotate(-24) scale(.9)"/>
+            <use href="#cn-bloom" transform="translate(116 46) rotate(40) scale(1.05)"/>
+            <use href="#cn-bloom" transform="translate(84 44) rotate(-14) scale(.8)"/>
+            <use href="#cn-bloom" transform="translate(172 116) rotate(8) scale(1.2)"/>
+            <use href="#cn-bloom" transform="translate(148 158) rotate(-34) scale(.95)"/>
+            <use href="#cn-bloom" transform="translate(238 134) rotate(30) scale(1.1)"/>
+            <use href="#cn-bloom" transform="translate(214 196) rotate(-16) scale(.85)"/>
+            <use href="#cn-bloom" transform="translate(110 74) rotate(58) scale(.7)"/>
+          </g>
+          <g fill="#B45E73">
+            <circle cx="140" cy="34" r="3.6"/>
+            <circle cx="196" cy="60" r="3.1"/>
+            <circle cx="258" cy="158" r="3.4"/>
+            <circle cx="186" cy="152" r="3"/>
+          </g>
+        </g>
+      </svg>
       <div class="cn-clouds">
         <span class="cn-cloud" style="top:6%;  --dur:55s; --delay:0s;   --size:180px;"></span>
         <span class="cn-cloud" style="top:16%; --dur:75s; --delay:-30s; --size:120px;"></span>
@@ -132,10 +272,14 @@
   </div>
 
   <div class="cn-sparkles" id="cnSparkles"></div>
+  <div class="cn-petals" id="cnPetals" aria-hidden="true"></div>
 
   <!-- ============ HERO ============ -->
   <section class="hero" id="home">
-    <div class="hero-frame"></div>
+    <div class="hero-frame">
+      <span class="hero-frame-seal hero-frame-seal--top">囍</span>
+      <span class="hero-frame-seal hero-frame-seal--bottom">囍</span>
+    </div>
     <div class="hero-content">
       <div class="reveal-fade" style="--d:.2s">
         <div class="hero-seal">
