@@ -90,25 +90,25 @@ document.addEventListener('DOMContentLoaded', () => {
   (function createPetals() {
     const wrap = document.getElementById('cnPetals');
     if (!wrap || reduceMotion) return;
-    const MAX_PETALS = 22;
+    const MAX_PETALS = 16;
 
     function spawnPetal() {
       if (wrap.childElementCount >= MAX_PETALS || document.hidden) return;
       const petal = document.createElement('span');
       petal.className = 'petal';
-      const size = 9 + Math.random() * 9;
+      const size = 8 + Math.random() * 7;
       petal.style.setProperty('--s', size.toFixed(1) + 'px');
       petal.style.left = (Math.random() * 100).toFixed(2) + 'vw';
       petal.style.setProperty('--dx', (Math.random() * 34 - 17).toFixed(1) + 'vw');
       petal.style.setProperty('--sway', (Math.random() * 60 + 45).toFixed(0) + 'px');
-      petal.style.setProperty('--dur', (9 + Math.random() * 6).toFixed(1) + 's');
+      petal.style.setProperty('--dur', (10 + Math.random() * 6).toFixed(1) + 's');
       petal.style.setProperty('--rot', (Math.random() * 360).toFixed(0) + 'deg');
-      petal.style.setProperty('--o', (0.55 + Math.random() * 0.4).toFixed(2));
+      petal.style.setProperty('--o', (0.5 + Math.random() * 0.3).toFixed(2));
       wrap.appendChild(petal);
       window.setTimeout(() => petal.remove(), 16500);
     }
 
-    window.setInterval(spawnPetal, 640);
+    window.setInterval(spawnPetal, 760);
     for (let i = 0; i < 9; i++) {
       window.setTimeout(spawnPetal, i * 280);
     }

@@ -14,27 +14,52 @@
   <!-- ============ LOADER : PEMBUKAAN 山水 ============ -->
   <div id="loader" role="status" aria-label="Memuat undangan">
     <div class="loader-scene" aria-hidden="true">
+      <div class="loader-sky"></div>
+      <div class="loader-swirl loader-swirl--a"></div>
+      <div class="loader-swirl loader-swirl--b"></div>
       <div class="loader-moon"></div>
+      <svg class="loader-birds" viewBox="0 0 200 90" fill="none" aria-hidden="true">
+        <g class="flap" style="animation-delay:0s"><path d="M6 26 Q13 19 20 26 Q27 19 34 26"/></g>
+        <g class="flap" style="animation-delay:-.35s"><path d="M52 12 Q58 6 64 12 Q70 6 76 12"/></g>
+        <g class="flap" style="animation-delay:-.15s"><path d="M96 34 Q103 27 110 34 Q117 27 124 34"/></g>
+        <g class="flap" style="animation-delay:-.5s"><path d="M148 18 Q154 12 160 18 Q166 12 172 18"/></g>
+        <g class="flap" style="animation-delay:-.28s"><path d="M72 58 Q78 52 84 58 Q90 52 96 58"/></g>
+      </svg>
       <svg class="loader-ridge loader-ridge--far" viewBox="0 0 1600 420" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
         <defs>
           <linearGradient id="ridgeFarLoader" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#6E3B47"/>
-            <stop offset=".55" stop-color="#452530"/>
-            <stop offset="1" stop-color="#311720"/>
+            <stop offset="0" stop-color="#8A5560"/>
+            <stop offset=".42" stop-color="#5A3641"/>
+            <stop offset="1" stop-color="#37202A"/>
           </linearGradient>
         </defs>
         <path fill="url(#ridgeFarLoader)" d="M0 302 C 65 292, 105 268, 158 258 C 214 248, 238 302, 302 290 C 352 281, 382 234, 442 218 C 500 203, 524 264, 588 270 C 644 275, 668 226, 732 211 C 800 196, 832 270, 906 263 C 962 258, 990 237, 1050 227 C 1114 216, 1138 277, 1204 282 C 1270 287, 1294 241, 1364 241 C 1424 241, 1462 288, 1522 292 C 1560 295, 1584 282, 1600 274 L 1600 420 L 0 420 Z"/>
+        <path class="ridge-edge" d="M0 302 C 65 292, 105 268, 158 258 C 214 248, 238 302, 302 290 C 352 281, 382 234, 442 218 C 500 203, 524 264, 588 270 C 644 275, 668 226, 732 211 C 800 196, 832 270, 906 263 C 962 258, 990 237, 1050 227 C 1114 216, 1138 277, 1204 282 C 1270 287, 1294 241, 1364 241 C 1424 241, 1462 288, 1522 292 C 1560 295, 1584 282, 1600 274"/>
+        <use href="#cn-pagoda" transform="translate(1302 197) scale(.155)" style="color:#241118" opacity=".9"/>
       </svg>
-      <div class="loader-mist"></div>
+      <div class="loader-mist loader-mist--a"></div>
+      <svg class="loader-ridge loader-ridge--mid" viewBox="0 0 1600 400" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="ridgeMidLoader" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#542E3A"/>
+            <stop offset=".5" stop-color="#3A2029"/>
+            <stop offset="1" stop-color="#231118"/>
+          </linearGradient>
+        </defs>
+        <path fill="url(#ridgeMidLoader)" d="M0 340 C 90 300, 150 258, 235 250 C 320 242, 350 322, 430 315 C 495 309, 520 250, 600 245 C 680 240, 715 320, 800 322 C 870 324, 900 262, 985 255 C 1065 249, 1090 318, 1175 322 C 1245 326, 1280 268, 1358 262 C 1420 257, 1500 300, 1600 295 L 1600 400 L 0 400 Z"/>
+        <path class="ridge-edge ridge-edge--mid" d="M0 340 C 90 300, 150 258, 235 250 C 320 242, 350 322, 430 315 C 495 309, 520 250, 600 245 C 680 240, 715 320, 800 322 C 870 324, 900 262, 985 255 C 1065 249, 1090 318, 1175 322 C 1245 326, 1280 268, 1358 262 C 1420 257, 1500 300, 1600 295"/>
+      </svg>
+      <div class="loader-mist loader-mist--b"></div>
       <svg class="loader-ridge loader-ridge--near" viewBox="0 0 1600 380" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
         <defs>
           <linearGradient id="ridgeNearLoader" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#3F1620"/>
-            <stop offset=".6" stop-color="#2C1017"/>
-            <stop offset="1" stop-color="#1F090F"/>
+            <stop offset="0" stop-color="#401722"/>
+            <stop offset=".55" stop-color="#2B1018"/>
+            <stop offset="1" stop-color="#1D080F"/>
           </linearGradient>
         </defs>
         <path fill="url(#ridgeNearLoader)" d="M0 326 C 70 296, 122 246, 188 230 C 248 216, 284 302, 352 303 C 402 304, 428 228, 498 204 C 560 183, 594 288, 672 293 C 737 297, 768 249, 842 239 C 906 230, 936 300, 1012 300 C 1072 300, 1098 216, 1172 197 C 1238 180, 1272 290, 1352 298 C 1412 304, 1456 264, 1522 267 C 1562 269, 1584 282, 1600 288 L 1600 380 L 0 380 Z"/>
+        <path class="ridge-edge ridge-edge--near" d="M0 326 C 70 296, 122 246, 188 230 C 248 216, 284 302, 352 303 C 402 304, 428 228, 498 204 C 560 183, 594 288, 672 293 C 737 297, 768 249, 842 239 C 906 230, 936 300, 1012 300 C 1072 300, 1098 216, 1172 197 C 1238 180, 1272 290, 1352 298 C 1412 304, 1456 264, 1522 267 C 1562 269, 1584 282, 1600 288"/>
       </svg>
     </div>
     <div class="loader-clouds" aria-hidden="true">
@@ -47,24 +72,86 @@
       <svg class="loader-oval" viewBox="0 0 540 360" fill="none">
         <defs>
           <linearGradient id="goldFrame" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#F9ECC0"/>
-            <stop offset=".3" stop-color="#E4C56E"/>
-            <stop offset=".55" stop-color="#9A7428"/>
-            <stop offset=".8" stop-color="#E9CE8F"/>
-            <stop offset="1" stop-color="#7C5B18"/>
+            <stop offset="0" stop-color="#FBF3CE"/>
+            <stop offset=".22" stop-color="#EFD98B"/>
+            <stop offset=".45" stop-color="#A87F2E"/>
+            <stop offset=".62" stop-color="#6E4F14"/>
+            <stop offset=".78" stop-color="#EFD98B"/>
+            <stop offset="1" stop-color="#8A6A20"/>
           </linearGradient>
+          <radialGradient id="ovalInnerGlow" cx="50%" cy="50%" r="68%">
+            <stop offset="0" stop-color="#F6E3B0" stop-opacity="0"/>
+            <stop offset=".78" stop-color="#F6E3B0" stop-opacity=".045"/>
+            <stop offset="1" stop-color="#F6E3B0" stop-opacity=".13"/>
+          </radialGradient>
+          <radialGradient id="gemRed" cx="38%" cy="35%" r="75%">
+            <stop offset="0" stop-color="#FF8E7A"/>
+            <stop offset=".45" stop-color="#C8102E"/>
+            <stop offset="1" stop-color="#6E0A18"/>
+          </radialGradient>
+          <radialGradient id="gemGreen" cx="38%" cy="35%" r="75%">
+            <stop offset="0" stop-color="#9FE0B4"/>
+            <stop offset=".45" stop-color="#2E8B57"/>
+            <stop offset="1" stop-color="#10391F"/>
+          </radialGradient>
         </defs>
-        <ellipse cx="270" cy="180" rx="238" ry="152" stroke="url(#goldFrame)" stroke-width="11"/>
-        <ellipse cx="270" cy="180" rx="238" ry="152" stroke="#31200A" stroke-opacity=".6" stroke-width="1.3"/>
-        <ellipse cx="270" cy="180" rx="221" ry="135" stroke="#F4DFA0" stroke-opacity=".9" stroke-width="1.4"/>
-        <ellipse class="loader-bead" cx="270" cy="180" rx="229.5" ry="143.5" stroke="#F4DFA0" stroke-opacity=".38" stroke-width="5" stroke-linecap="round" stroke-dasharray="0.6 9.5"/>
-        <path d="M228 33 Q270 11 312 33 Q270 24 228 33 Z" fill="url(#goldFrame)"/>
-        <path d="M228 327 Q270 349 312 327 Q270 336 228 327 Z" fill="url(#goldFrame)"/>
-        <g fill="#F4DFA0" stroke="#8A6A1F" stroke-width="1.1">
-          <circle cx="270" cy="31" r="4.4"/>
-          <circle cx="270" cy="329" r="4.4"/>
-          <circle cx="32" cy="180" r="4.4"/>
-          <circle cx="508" cy="180" r="4.4"/>
+
+        <!-- isi bingkai -->
+        <ellipse cx="270" cy="180" rx="214" ry="129" fill="url(#ovalInnerGlow)"/>
+
+        <!-- anyaman luar -->
+        <ellipse cx="270" cy="180" rx="238" ry="152" stroke="url(#goldFrame)" stroke-width="12"/>
+        <ellipse cx="270" cy="180" rx="244" ry="158" stroke="#2A1A06" stroke-opacity=".85" stroke-width="1.1"/>
+        <ellipse cx="270" cy="180" rx="232" ry="146" stroke="#2A1A06" stroke-opacity=".5" stroke-width=".8"/>
+
+        <!-- guilloche: dua deret titik silang -->
+        <ellipse cx="270" cy="180" rx="238" ry="152" stroke="#FDF6DC" stroke-opacity=".5" stroke-width="1.6" stroke-dasharray="3 7"/>
+        <ellipse cx="270" cy="180" rx="238" ry="152" stroke="#5C4210" stroke-opacity=".8" stroke-width="1.6" stroke-dasharray="3 7" stroke-dashoffset="5"/>
+
+        <!-- guilloche dalam -->
+        <ellipse cx="270" cy="180" rx="222" ry="136" stroke="#F4DFA0" stroke-opacity=".8" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="0.5 6.4"/>
+
+        <!-- garis dalam utama -->
+        <ellipse cx="270" cy="180" rx="212" ry="126" stroke="#FDF0BC" stroke-opacity=".95" stroke-width="1.6"/>
+        <ellipse cx="270" cy="180" rx="206" ry="120" stroke="#160C03" stroke-opacity=".55" stroke-width="1.1"/>
+
+        <!-- glint berjalan mengelilingi bingkai -->
+        <ellipse class="oval-glint" cx="270" cy="180" rx="238" ry="152" stroke="#FFFDF0" stroke-opacity=".95" stroke-width="3.4" stroke-linecap="round" pathLength="100" stroke-dasharray="9 91"/>
+
+        <!-- ornamen atas & bawah : ruyi 如意 -->
+        <g stroke="url(#goldFrame)" stroke-width="3.4" stroke-linecap="round" fill="none">
+          <path d="M212 34 Q270 12 328 34"/>
+          <path d="M212 326 Q270 348 328 326"/>
+        </g>
+        <g stroke="#FDF0BC" stroke-width="1.1" stroke-linecap="round" fill="none" opacity=".85">
+          <path d="M218 30 Q270 10 322 30"/>
+          <path d="M218 330 Q270 350 322 330"/>
+        </g>
+        <g>
+          <path d="M196 33 C 186 24, 190 12, 202 14 C 212 16, 210 28, 202 29 C 196 30, 192 24, 197 19" fill="none" stroke="url(#goldFrame)" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M344 33 C 354 24, 350 12, 338 14 C 328 16, 330 28, 338 29 C 344 30, 348 24, 343 19" fill="none" stroke="url(#goldFrame)" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M196 327 C 186 336, 190 348, 202 346 C 212 344, 210 332, 202 331 C 196 330, 192 336, 197 341" fill="none" stroke="url(#goldFrame)" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M344 327 C 354 336, 350 348, 338 346 C 328 344, 330 332, 338 331 C 344 330, 348 336, 343 341" fill="none" stroke="url(#goldFrame)" stroke-width="2.6" stroke-linecap="round"/>
+          <circle cx="270" cy="22" r="7.4" fill="url(#gemRed)" stroke="url(#goldFrame)" stroke-width="1.6"/>
+          <circle cx="270" cy="338" r="7.4" fill="url(#gemRed)" stroke="url(#goldFrame)" stroke-width="1.6"/>
+        </g>
+
+        <!-- ornamen kiri & kanan : simpul lotus -->
+        <g>
+          <path d="M33 152 L45 180 L33 208 L21 180 Z" fill="url(#goldFrame)" stroke="#5C4210" stroke-width="1.1"/>
+          <path d="M507 152 L519 180 L507 208 L495 180 Z" fill="url(#goldFrame)" stroke="#5C4210" stroke-width="1.1"/>
+          <circle cx="33" cy="180" r="4.6" fill="url(#gemGreen)" stroke="#2A1A06" stroke-width=".9"/>
+          <circle cx="507" cy="180" r="4.6" fill="url(#gemGreen)" stroke="#2A1A06" stroke-width=".9"/>
+          <path d="M33 132 L33 144 M33 216 L33 228 M507 132 L507 144 M507 216 L507 228" stroke="url(#goldFrame)" stroke-width="2.2" stroke-linecap="round"/>
+        </g>
+
+        <!-- 8 kuncup lotus di diagonal & sumbu -->
+        <g fill="url(#goldFrame)" stroke="#3A2808" stroke-width=".8" stroke-opacity=".9">
+          <path d="M102 78 l7 12 l-7 12 l-7 -12 Z"/>
+          <path d="M438 78 l7 12 l-7 12 l-7 -12 Z"/>
+          <path d="M102 258 l7 12 l-7 12 l-7 -12 Z"/>
+          <path d="M438 258 l7 12 l-7 12 l-7 -12 Z"/>
+          <path d="M102 66 l0 -10 M102 102 l0 10 M438 66 l0 -10 M438 102 l0 10 M102 254 l0 -10 M102 290 l0 10 M438 254 l0 -10 M438 290 l0 10" stroke="url(#goldFrame)" stroke-width="2"/>
         </g>
       </svg>
       <div class="loader-inner-frame">
@@ -147,6 +234,13 @@
             <rect x="54" y="245" width="132" height="12"/>
           </g>
           <rect x="109" y="218" width="22" height="27" fill="#0A0305"/>
+          <g fill="#E8C87A" fill-opacity=".8">
+            <rect x="95" y="152" width="4" height="7"/>
+            <rect x="118" y="152" width="4" height="7"/>
+            <rect x="141" y="152" width="4" height="7"/>
+            <rect x="104" y="102" width="4" height="6"/>
+            <rect x="132" y="102" width="4" height="6"/>
+          </g>
         </symbol>
       </defs>
     </svg>
@@ -175,6 +269,17 @@
       </svg>
     </div>
     <div class="cn-layer cn-layer--mid" data-depth="0.22">
+      <svg class="cn-birds cn-birds--a" viewBox="0 0 220 110" fill="none" aria-hidden="true">
+        <g class="flap" style="animation-delay:0s"><path d="M8 30 Q16 22 24 30 Q32 22 40 30"/></g>
+        <g class="flap" style="animation-delay:-.4s"><path d="M64 14 Q71 7 78 14 Q85 7 92 14"/></g>
+        <g class="flap" style="animation-delay:-.2s"><path d="M120 40 Q128 32 136 40 Q144 32 152 40"/></g>
+        <g class="flap" style="animation-delay:-.55s"><path d="M168 22 Q174 16 180 22 Q186 16 192 22"/></g>
+      </svg>
+      <svg class="cn-birds cn-birds--b" viewBox="0 0 220 110" fill="none" aria-hidden="true">
+        <g class="flap" style="animation-delay:-.3s"><path d="M20 70 Q27 64 34 70 Q41 64 48 70"/></g>
+        <g class="flap" style="animation-delay:0s"><path d="M96 56 Q103 50 110 56 Q117 50 124 56"/></g>
+        <g class="flap" style="animation-delay:-.6s"><path d="M150 84 Q156 78 162 84 Q168 78 174 84"/></g>
+      </svg>
       <svg class="cn-pagoda cn-pagoda--left" viewBox="0 0 240 268" aria-hidden="true"><use href="#cn-pagoda"/></svg>
       <svg class="cn-pagoda cn-pagoda--right" viewBox="0 0 240 268" aria-hidden="true"><use href="#cn-pagoda"/></svg>
       <svg class="cn-dragon cn-dragon--1" viewBox="0 0 240 170" fill="none">
