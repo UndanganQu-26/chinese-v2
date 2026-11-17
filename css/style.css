@@ -342,7 +342,7 @@ button {
 /* ---------- candi di tepi telaga ---------- */
 .loader-temple {
   position: absolute;
-  left: 50%;
+  left: 44%;
   bottom: 8%;
   width: min(195px, 44vw);
   transform: translateX(-50%);
@@ -414,11 +414,42 @@ button {
 /* ---------- pohon plum tumbuh & mekar ---------- */
 .loader-growth {
   position: absolute;
-  left: 50%;
+  left: 64%;
   bottom: -2%;
-  width: min(330px, 72vw);
+  width: min(300px, 62vw);
   transform: translateX(-50%);
+  transform-origin: 50% 100%;
   z-index: 7;
+  animation: growthSway 9s 3.2s ease-in-out infinite alternate;
+}
+
+@keyframes growthSway {
+  from { transform: translateX(-50%) rotate(-.6deg); }
+  to   { transform: translateX(-50%) rotate(.7deg); }
+}
+
+.roof-rim {
+  fill: none;
+  stroke: rgba(240,222,168,.4);
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  opacity: 0;
+  animation: rimIn 1.6s 2.3s ease forwards;
+}
+
+@keyframes rimIn {
+  to { opacity: 1; }
+}
+
+.flame {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: flameFlick 1.1s ease-in-out infinite alternate;
+}
+
+@keyframes flameFlick {
+  from { transform: scaleY(.72) scaleX(.9); opacity: .72; }
+  to   { transform: scaleY(1.18) scaleX(1.06); opacity: 1; }
 }
 
 .grow {
@@ -2983,7 +3014,7 @@ body.loader-done .music-control {
 
 .loader-temple-aura {
   position: absolute;
-  left: 50%;
+  left: 44%;
   bottom: 2%;
   width: min(460px, 95vw);
   aspect-ratio: 1;
