@@ -248,18 +248,18 @@ button {
 @keyframes ld7MistDriftB { from { transform: translateX(0); } to { transform: translateX(-4vw); } }
 
 /* ---------- pohon plum (4 dahan ramping dari sudut layar) ---------- */
-.ld7-tree { position: absolute; }
+.ld7-tree { position: absolute; overflow: visible; }
 
-.ld7-tree-a { top: -3vh; left: -4vw; width: min(58vw, 66vh); height: auto;
+.ld7-tree-a { top: -3vh; left: -4vw; width: min(68vw, 78vh); height: auto;
   transform-origin: 0% 0%;
   animation: ld7BrInL .9s .2s cubic-bezier(.22,.61,.36,1) both, ld7SwayA 12s 2.9s ease-in-out infinite alternate; }
-.ld7-tree-b { top: -3vh; right: -4vw; width: min(50vw, 52vh); height: auto;
+.ld7-tree-b { top: -3vh; right: -4vw; width: min(59vw, 61vh); height: auto;
   transform-origin: 100% 0%;
   animation: ld7BrInR .9s .25s cubic-bezier(.22,.61,.36,1) both, ld7SwayB 13.5s 3s ease-in-out infinite alternate; }
-.ld7-tree-c { bottom: -1vh; left: -4vw; width: min(40vw, 34vh); height: auto;
+.ld7-tree-c { bottom: -1vh; left: -4vw; width: min(47vw, 40vh); height: auto;
   transform-origin: 0% 100%;
   animation: ld7BrInL .95s .35s cubic-bezier(.22,.61,.36,1) both, ld7SwayC 10.5s 3.15s ease-in-out infinite alternate; }
-.ld7-tree-d { bottom: -1vh; right: -4vw; width: min(36vw, 27vh); height: auto;
+.ld7-tree-d { bottom: -1vh; right: -4vw; width: min(42vw, 32vh); height: auto;
   transform-origin: 100% 100%;
   animation: ld7BrInR .95s .4s cubic-bezier(.22,.61,.36,1) both, ld7SwayD 9.5s 3.3s ease-in-out infinite alternate; }
 
