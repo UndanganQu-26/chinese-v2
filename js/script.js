@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.clearTimeout(loaderTimer);
   }
 
-  const loaderTimer = window.setTimeout(hideLoader, reduceMotion ? 150 : 6000);
+  const loaderTimer = window.setTimeout(hideLoader, reduceMotion ? 150 : 6300);
 
   if (loader) {
     loader.addEventListener('click', hideLoader);
@@ -23,6 +23,29 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') hideLoader();
     });
   }
+
+  /* ========== LOADER PARALLAX POINTER (halus; hanya pointer presisi) ========== */
+  (function () {
+    if (!loader || reduceMotion) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    const parLayers = loader.querySelectorAll('.ld7-pl');
+    if (!parLayers.length) return;
+    let parRaf = 0, parX = 0, parY = 0;
+    loader.addEventListener('pointermove', (e) => {
+      parX = e.clientX / window.innerWidth - 0.5;
+      parY = e.clientY / window.innerHeight - 0.5;
+      if (!parRaf) {
+        parRaf = window.requestAnimationFrame(() => {
+          parRaf = 0;
+          parLayers.forEach((el) => {
+            const d = parseFloat(el.getAttribute('data-depth') || '10');
+            el.style.transform = 'translate3d(' + (-parX * d).toFixed(1) + 'px, '
+              + (-parY * d * 0.55).toFixed(1) + 'px, 0)';
+          });
+        });
+      }
+    });
+  })();
 
   /* ========== PERSONALIZE GUEST NAME ========== */
   (function personalizeGuest() {
