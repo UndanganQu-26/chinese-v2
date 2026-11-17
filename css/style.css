@@ -115,9 +115,9 @@ button {
   position: absolute;
   inset: 0;
   overflow: hidden;
-  transform-origin: 50% 42%;
+  transform-origin: 50% 72%;
   animation: sceneIntro 2.8s cubic-bezier(.22,.61,.36,1) both,
-             enterZoom 1.25s 3s cubic-bezier(.55,0,.85,.4) forwards;
+             enterZoom 1.2s 3.1s cubic-bezier(.55,0,.85,.4) forwards;
 }
 
 @keyframes sceneIntro {
@@ -126,7 +126,7 @@ button {
 }
 
 @keyframes enterZoom {
-  to { transform: scale(1.5); }
+  to { transform: scale(1.95); }
 }
 
 .loader-sky {
@@ -356,8 +356,8 @@ button {
 .loader-temple {
   position: absolute;
   left: 50%;
-  bottom: 2%;
-  width: min(66vw, 48vh);
+  bottom: 12%;
+  width: min(94vw, 58vh);
   transform: translateX(-50%);
   opacity: 0;
   z-index: 4;
@@ -385,15 +385,6 @@ button {
   to   { fill-opacity: .95; }
 }
 
-.temple-reflection {
-  filter: blur(.8px);
-  opacity: 0;
-  animation: reflectionIn 1.5s 2.45s ease forwards;
-}
-
-@keyframes reflectionIn {
-  to { opacity: .17; }
-}
 
 .roof-rim {
   fill: none;
@@ -424,13 +415,64 @@ button {
   opacity: 0;
   transform-box: fill-box;
   transform-origin: 50% 50%;
-  animation: gateBloom 1s 3.05s cubic-bezier(.5,0,.75,.6) forwards;
+  animation: gateBloom .9s 3.6s cubic-bezier(.5,0,.75,.6) forwards;
 }
 
 @keyframes gateBloom {
   0%   { opacity: 0; transform: scale(.4); }
   30%  { opacity: .9; }
   100% { opacity: .98; transform: scale(60); }
+}
+
+.gate-light {
+  opacity: 0;
+  animation: gateLightIn 1s 2.35s ease forwards;
+}
+
+@keyframes gateLightIn {
+  from { opacity: .02; }
+  60%  { opacity: .85; }
+  to   { opacity: 1; }
+}
+
+.gate-door {
+  transform-box: view-box;
+  backface-visibility: hidden;
+}
+
+.gate-door--l {
+  transform-origin: 124px 282px;
+  animation: gateOpenL .95s 2.4s cubic-bezier(.55,.06,.3,1) forwards;
+}
+
+.gate-door--r {
+  transform-origin: 196px 282px;
+  animation: gateOpenR .95s 2.4s cubic-bezier(.55,.06,.3,1) forwards;
+}
+
+@keyframes gateOpenL {
+  0%   { transform: scaleX(1) skewY(0deg); }
+  55%  { transform: scaleX(.62) skewY(-1.3deg); }
+  100% { transform: scaleX(.035) skewY(-2deg); }
+}
+
+@keyframes gateOpenR {
+  0%   { transform: scaleX(1) skewY(0deg); }
+  55%  { transform: scaleX(.62) skewY(1.3deg); }
+  100% { transform: scaleX(.035) skewY(2deg); }
+}
+
+.gate-beam {
+  opacity: 0;
+  transform-box: view-box;
+  transform-origin: 50% 75%;
+  animation: gateBeamIn .9s 2.75s ease forwards;
+}
+
+@keyframes gateBeamIn {
+  from { opacity: 0; transform: scaleY(.55); }
+  55%  { opacity: .5; transform: scaleY(1.05); }
+  to   { opacity: .42; transform: scaleY(1); }
 }
 
 .loader-temple-aura {
@@ -440,11 +482,11 @@ button {
   width: min(560px, 104vw);
   aspect-ratio: 1;
   transform: translateX(-50%);
-  background: radial-gradient(ellipse at 50% 58%, rgba(233,183,90,.32), rgba(233,183,90,.08) 45%, transparent 68%);
+  background: radial-gradient(ellipse at 50% 58%, rgba(233,183,90,.24), rgba(233,183,90,.06) 46%, transparent 70%);
   opacity: 0;
   z-index: 3;
   pointer-events: none;
-  animation: auraIn 1.7s 2.05s ease forwards;
+  animation: auraIn 2s 2.1s ease forwards;
 }
 
 @keyframes auraIn {
@@ -548,6 +590,11 @@ button {
   display: block;
   width: 100%;
   height: 100%;
+}
+
+.loader-flap--right svg {
+  -webkit-mask-image: linear-gradient(270deg, #000 0%, #000 88%, transparent 100%);
+  mask-image: linear-gradient(270deg, #000 0%, #000 88%, transparent 100%);
 }
 
 .loader-flap--left {
@@ -910,27 +957,41 @@ button {
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(26, 6, 10, 0.66);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(244, 223, 160, 0.16);
+  padding: 14px 16px 0;
+  background: transparent;
   transition: var(--transition);
 }
 
 .navbar.scrolled {
-  background: rgba(22, 5, 8, 0.88);
-  box-shadow: 0 10px 40px rgba(10, 2, 4, 0.5);
+  background: transparent;
 }
 
 .nav-container {
-  max-width: 1140px;
+  max-width: 1120px;
   margin: 0 auto;
-  padding: 0 28px;
-  height: 68px;
+  padding: 0 10px 0 18px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: relative;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(62, 19, 28, 0.58), rgba(22, 5, 9, 0.48));
+  border: 1px solid rgba(244, 223, 160, 0.22);
+  box-shadow:
+    0 14px 42px rgba(8, 2, 4, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.navbar.scrolled .nav-container {
+  background: linear-gradient(135deg, rgba(58, 17, 26, 0.74), rgba(16, 4, 8, 0.64));
+  border-color: rgba(244, 223, 160, 0.3);
+  box-shadow:
+    0 18px 52px rgba(8, 2, 4, 0.56),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09);
 }
 
 .nav-logo {
@@ -962,7 +1023,8 @@ button {
 
 .nav-menu {
   display: flex;
-  gap: 30px;
+  align-items: center;
+  gap: 28px;
 }
 
 .nav-link {
@@ -2649,9 +2711,18 @@ section[id] {
 .nav-close { display: none; }
 
 @media (max-width: 768px) {
+  .navbar {
+    padding: 10px 12px 0;
+  }
+
+  .nav-container {
+    height: 56px;
+    padding: 0 8px 0 14px;
+  }
+
   .nav-menu {
     position: fixed;
-    top: 84px;
+    top: 78px;
     left: 50%;
     right: auto;
     bottom: auto;
@@ -2666,12 +2737,14 @@ section[id] {
     justify-content: flex-start;
     align-items: center;
     gap: 2px;
-    border-radius: 18px;
-    background: rgba(22, 5, 8, 0.94);
-    border: 1px solid rgba(244, 223, 160, 0.25);
-    box-shadow: 0 30px 80px rgba(10, 2, 4, 0.6);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    border-radius: 22px;
+    background: linear-gradient(160deg, rgba(44, 12, 20, 0.9), rgba(12, 3, 6, 0.94));
+    border: 1px solid rgba(244, 223, 160, 0.26);
+    box-shadow:
+      0 30px 80px rgba(10, 2, 4, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px) saturate(150%);
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -2687,8 +2760,12 @@ section[id] {
   }
 
   .nav-link {
-    padding: 10px 0;
+    padding: 12px 0;
     font-size: 14px;
+  }
+
+  .nav-logo {
+    font-size: 19px;
   }
 
   .nav-toggle {
