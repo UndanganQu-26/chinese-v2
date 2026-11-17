@@ -102,7 +102,7 @@ button {
   z-index: 99999;
   overflow: hidden;
   cursor: pointer;
-  background: #F4EDD9;
+  background: linear-gradient(180deg, #E7E2B6 0%, #EFE9CC 16%, #F5EFDC 34%, #F7F0DE 52%, #F4E8D4 72%, #EFDFC9 100%);
   transition: opacity 1.1s ease, visibility 1.1s ease;
 }
 
@@ -117,7 +117,7 @@ button {
   inset: 0;
   overflow: hidden;
   transform-origin: 50% 44%;
-  animation: ld7SceneIn 3.2s cubic-bezier(.22,.61,.36,1) both,
+  animation: ld7SceneIn 1.5s cubic-bezier(.22,.61,.36,1) both,
              ld7Enter 1.6s 4.7s cubic-bezier(.45,0,.3,1) forwards;
 }
 
@@ -152,13 +152,8 @@ button {
 .ld7-sky {
   position: absolute;
   inset: 0;
+  pointer-events: none;
   background: linear-gradient(180deg, #E7E2B6 0%, #EFE9CC 16%, #F5EFDC 34%, #F7F0DE 52%, #F4E8D4 72%, #EFDFC9 100%);
-  animation: ld7SkyIn 1.9s ease both;
-}
-
-@keyframes ld7SkyIn {
-  from { opacity: 0; transform: scale(1.05); }
-  to   { opacity: 1; transform: scale(1); }
 }
 
 .ld7-glow {
@@ -257,16 +252,16 @@ button {
 
 .ld7-tree-a { top: -3vh; left: -4vw; width: min(58vw, 66vh); height: auto;
   transform-origin: 0% 0%;
-  animation: ld7BrInL 1.1s .35s cubic-bezier(.22,.61,.36,1) both, ld7SwayA 12s 2.9s ease-in-out infinite alternate; }
+  animation: ld7BrInL .9s .2s cubic-bezier(.22,.61,.36,1) both, ld7SwayA 12s 2.9s ease-in-out infinite alternate; }
 .ld7-tree-b { top: -3vh; right: -4vw; width: min(50vw, 52vh); height: auto;
   transform-origin: 100% 0%;
-  animation: ld7BrInR 1.1s .4s cubic-bezier(.22,.61,.36,1) both, ld7SwayB 13.5s 3s ease-in-out infinite alternate; }
+  animation: ld7BrInR .9s .25s cubic-bezier(.22,.61,.36,1) both, ld7SwayB 13.5s 3s ease-in-out infinite alternate; }
 .ld7-tree-c { bottom: -1vh; left: -4vw; width: min(40vw, 34vh); height: auto;
   transform-origin: 0% 100%;
-  animation: ld7BrInL 1.15s .55s cubic-bezier(.22,.61,.36,1) both, ld7SwayC 10.5s 3.15s ease-in-out infinite alternate; }
+  animation: ld7BrInL .95s .35s cubic-bezier(.22,.61,.36,1) both, ld7SwayC 10.5s 3.15s ease-in-out infinite alternate; }
 .ld7-tree-d { bottom: -1vh; right: -4vw; width: min(36vw, 27vh); height: auto;
   transform-origin: 100% 100%;
-  animation: ld7BrInR 1.15s .6s cubic-bezier(.22,.61,.36,1) both, ld7SwayD 9.5s 3.3s ease-in-out infinite alternate; }
+  animation: ld7BrInR .95s .4s cubic-bezier(.22,.61,.36,1) both, ld7SwayD 9.5s 3.3s ease-in-out infinite alternate; }
 
 /* dahan "membuka": masuk dari sisi kiri / kanan sambil mengembang dari sudut */
 @keyframes ld7BrInL {
@@ -308,18 +303,17 @@ button {
 
 /* ---------- seal 囍 ---------- */
 .ld7-seal {
-  position: absolute;
-  left: 50%;
-  top: 43%;
-  transform: translate(-50%, -50%);
+  position: relative;
+  width: max-content;
+  margin: 0 auto 2.4vh;
 }
 
 .ld7-seal-svg {
   display: block;
-  width: clamp(96px, 26vmin, 200px);
+  width: clamp(76px, 12vmin, 118px);
   height: auto;
-  filter: drop-shadow(0 0 22px rgba(255,240,212,.6));
-  animation: ld7SealIn 1.5s 2.6s cubic-bezier(.22,.61,.36,1) both;
+  filter: drop-shadow(0 0 18px rgba(255,240,212,.7));
+  animation: ld7SealIn 1.2s 2.05s cubic-bezier(.22,.61,.36,1) both;
 }
 
 @keyframes ld7SealIn {
@@ -402,6 +396,108 @@ button {
 }
 
 @keyframes ld7VigIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---------- tirai dedaunan: nutup layar → kebuka kiri/kanan ---------- */
+.ld7-cover {
+  position: absolute;
+  top: 0;
+  width: 85vw;
+  height: 100%;
+  z-index: 5;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ld7-cover .ld7-tree { position: static; }
+.ld7-cover svg { display: block; width: 100%; height: 100%; }
+
+/* tepi dalam memudar halus — tidak ada garis kotak saat tirai bergeser */
+.ld7-cover--l {
+  left: 0;
+  -webkit-mask-image: linear-gradient(to right, #000 0%, #000 78%, transparent 100%);
+  mask-image: linear-gradient(to right, #000 0%, #000 78%, transparent 100%);
+  animation: ld7CoverL 1.5s .8s cubic-bezier(.62,0,.28,1) both;
+}
+
+.ld7-cover--r {
+  right: 0;
+  -webkit-mask-image: linear-gradient(to left, #000 0%, #000 78%, transparent 100%);
+  mask-image: linear-gradient(to left, #000 0%, #000 78%, transparent 100%);
+  animation: ld7CoverR 1.5s .8s cubic-bezier(.62,0,.28,1) both;
+}
+
+@keyframes ld7CoverL {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-108%, 0, 0); }
+}
+
+@keyframes ld7CoverR {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(108%, 0, 0); }
+}
+
+/* ---------- judul undangan di loader ---------- */
+.ld7-titles {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+  width: min(92vw, 860px);
+  text-align: center;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.ld7-eyebrow {
+  font-family: var(--font-heading);
+  font-size: clamp(10px, 1.5vw, 14px);
+  font-weight: 600;
+  letter-spacing: 7px;
+  text-transform: uppercase;
+  color: #B8893B;
+  margin: 0 0 1.2vh;
+  opacity: 0;
+  animation: ld7TitleIn .9s 2.25s cubic-bezier(.22,.61,.36,1) both;
+}
+
+.ld7-names {
+  font-family: var(--font-heading);
+  font-size: clamp(40px, 8vw, 82px);
+  font-weight: 600;
+  line-height: 1.06;
+  color: #8E2B25;
+  text-shadow: 0 3px 22px rgba(255,246,228,.9);
+  margin: 0 0 1.6vh;
+  opacity: 0;
+  animation: ld7TitleIn 1s 2.45s cubic-bezier(.22,.61,.36,1) both;
+}
+
+.ld7-amp {
+  font-style: italic;
+  font-weight: 500;
+  color: #C09343;
+}
+
+.ld7-han {
+  font-family: var(--font-cn);
+  font-size: clamp(17px, 3vw, 26px);
+  letter-spacing: 8px;
+  padding-left: 8px;
+  color: #9A732F;
+  text-shadow: 0 1px 10px rgba(255,248,232,.9);
+  margin: 0;
+  opacity: 0;
+  animation: ld7TitleIn 1s 2.75s cubic-bezier(.22,.61,.36,1) both;
+}
+
+@media (max-width: 767px) {
+  .ld7-titles { top: 43%; }
+}
+
+@keyframes ld7TitleIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .ld7-petal,
