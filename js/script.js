@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.clearTimeout(loaderTimer);
   }
 
-  const loaderTimer = window.setTimeout(hideLoader, reduceMotion ? 150 : 6300);
+  const loaderTimer = window.setTimeout(hideLoader, reduceMotion ? 150 : 11500);
 
   if (loader) {
     loader.addEventListener('click', hideLoader);
@@ -176,10 +176,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ========== PARALLAX LIVE — SCROLL + MOUSE ========== */
   const bgLayers = document.querySelectorAll('.cn-layer');
-  const heroContent = document.querySelector('.hero-content');
   const navbarEl = document.querySelector('.navbar');
 
   let sy = window.scrollY;
+  let scy = window.scrollY;   // nilai scroll yang sudah dihaluskan
   let mx = 0, my = 0;   // target mouse (-0.5 .. 0.5)
   let cx = 0, cy = 0;   // current (lerp)
 
@@ -197,16 +197,13 @@ document.addEventListener('DOMContentLoaded', () => {
   (function parallaxLoop() {
     cx += (mx - cx) * 0.055;
     cy += (my - cy) * 0.055;
+    scy += (sy - scy) * 0.4;   // halus tapi tetap responsif (tidak patah / tidak telat)
     bgLayers.forEach(layer => {
       const depth = parseFloat(layer.dataset.depth) || 0.2;
       const tx = (-cx * 34 * depth).toFixed(2);
-      const ty = ((-sy * depth) + (-cy * 22 * depth)).toFixed(2);
+      const ty = ((-scy * depth) + (-cy * 22 * depth)).toFixed(2);
       layer.style.transform = 'translate3d(' + tx + 'px, ' + ty + 'px, 0)';
     });
-    if (heroContent && sy < window.innerHeight) {
-      heroContent.style.transform = 'translateY(' + (sy * 0.28) + 'px)';
-      heroContent.style.opacity = 1 - (sy / window.innerHeight) * 0.55;
-    }
     requestAnimationFrame(parallaxLoop);
   })();
 
@@ -445,11 +442,34 @@ if (navClose) {
 /* ========== COPY REKENING ========== */
 const copyRek = document.getElementById('copyRek');
 if (copyRek) {
-  copyRek.addEventListener('click', () => {
-    const rek = (document.querySelector('.rek') && document.querySelector('.rek').textContent.trim()) || '1234567890';
-    navigator.clipboard.writeText(rek).then(() => {
-      copyRek.textContent = 'Tersalin!';
-      setTimeout(() => { copyRek.textContent = 'Salin No. Rekening'; }, 2000);
-    }).catch(() => {});
+  function fallbackCopy(text) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.top = '-1000px';
+    document.body.appendChild(ta);
+    ta.select();
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+  copyRek.addEventListener('click', async () => {
+    const el = document.querySelector('.rek');
+    const rek = (el && el.textContent.trim()) || '1234567890';
+    let ok = false;
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(rek);
+        ok = true;
+      } else {
+        ok = fallbackCopy(rek);
+      }
+    } catch (e) {
+      ok = fallbackCopy(rek);
+    }
+    copyRek.textContent = ok ? 'Tersalin!' : 'Gagal menyalin';
+    setTimeout(() => { copyRek.textContent = 'Salin No. Rekening'; }, 2000);
   });
 }

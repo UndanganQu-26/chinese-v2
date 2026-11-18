@@ -118,12 +118,12 @@ button {
   overflow: hidden;
   transform-origin: 50% 44%;
   animation: ld7SceneIn 1.5s cubic-bezier(.22,.61,.36,1) both,
-             ld7Enter 1.6s 4.7s cubic-bezier(.45,0,.3,1) forwards;
+             ld7Enter 1.9s 10s cubic-bezier(.45,0,.3,1) forwards;
 }
 
 @keyframes ld7SceneIn {
-  from { opacity: 0; transform: scale(1.06); }
-  to   { opacity: 1; transform: scale(1); }
+  from { transform: scale(1.06); }
+  to   { transform: scale(1); }
 }
 
 @keyframes ld7Enter {
@@ -146,7 +146,7 @@ button {
 
 @keyframes ld7ParFar   { from { transform: translate3d(9px, 6px, 0); }  to { transform: translate3d(-9px, -5px, 0); } }
 @keyframes ld7ParMid   { from { transform: translate3d(-12px, 5px, 0); } to { transform: translate3d(12px, -6px, 0); } }
-@keyframes ld7ParFront { from { transform: translate3d(8px, -6px, 0); }  to { transform: translate3d(-14px, 7px, 0); } }
+@keyframes ld7ParFront { from { transform: translate3d(10px, -6px, 0); } to { transform: translate3d(-14px, 7px, 0); } }
 
 /* ---------- langit & cahaya ---------- */
 .ld7-sky {
@@ -192,8 +192,13 @@ button {
 /* ---------- gunung & pagoda ---------- */
 .ld7-mtn { position: absolute; left: -4%; width: 108%; }
 
-.ld7-mtn--far  { bottom: 27%; height: 40%; animation: ld7Rise 2.1s .55s ease both; }
-.ld7-mtn--near { bottom: 19%; height: 36%; animation: ld7Rise 2.1s .85s ease both; }
+.ld7-mtn--far  { bottom: 27%; height: 40%; animation: ld7Rise 2.1s .55s ease both, ld7MtnBreathe 16s 3s ease-in-out infinite alternate; }
+.ld7-mtn--near { bottom: 19%; height: 36%; animation: ld7Rise 2.1s .85s ease both, ld7MtnBreathe 19s 5s ease-in-out infinite alternate; }
+
+@keyframes ld7MtnBreathe {
+  from { filter: brightness(.97); }
+  to   { filter: brightness(1.05); }
+}
 
 @keyframes ld7Rise {
   from { opacity: 0; transform: translateY(30px); }
@@ -206,10 +211,11 @@ button {
   bottom: 29%;
   width: 17vmin;
   height: auto;
-  animation: ld7FarPag 2s 1.05s ease both;
+  animation: ld7FarPag 2s 1.05s ease both, ld7FarPagGlow 8s 3s ease-in-out infinite alternate;
 }
 
 @keyframes ld7FarPag { from { opacity: 0; } to { opacity: .16; } }
+@keyframes ld7FarPagGlow { from { filter: brightness(.9); } to { filter: brightness(1.25); } }
 
 .ld7-pagoda-near {
   position: absolute;
@@ -217,8 +223,10 @@ button {
   bottom: 4vh;
   height: 42vh;
   width: auto;
-  animation: ld7PagIn 2.1s 1.25s cubic-bezier(.22,.61,.36,1) both;
+  animation: ld7PagIn 2.1s 1.25s cubic-bezier(.22,.61,.36,1) both, ld7NearPagGlow 10s 3.5s ease-in-out infinite alternate;
 }
+
+@keyframes ld7NearPagGlow { from { filter: brightness(.96); } to { filter: brightness(1.07); } }
 
 @media (min-width: 768px) {
   .ld7-pagoda-near { height: 56vh; left: -4vw; bottom: 2vh; }
@@ -250,44 +258,66 @@ button {
 /* ---------- pohon plum (4 dahan ramping dari sudut layar) ---------- */
 .ld7-tree { position: absolute; overflow: visible; }
 
-.ld7-tree-a { top: -3vh; left: -4vw; width: min(68vw, 78vh); height: auto;
+.ld7-tree-a { top: -4vh; left: -6vw; width: min(46vw, 54vh); height: auto;
   transform-origin: 0% 0%;
-  animation: ld7BrInL .9s .2s cubic-bezier(.22,.61,.36,1) both, ld7SwayA 12s 2.9s ease-in-out infinite alternate; }
-.ld7-tree-b { top: -3vh; right: -4vw; width: min(59vw, 61vh); height: auto;
+  animation: ld7BrIn 1.2s .5s ease both, ld7SwayA 9.5s 3s ease-in-out infinite alternate; }
+.ld7-tree-b { top: -4vh; right: -6vw; width: min(42vw, 48vh); height: auto;
   transform-origin: 100% 0%;
-  animation: ld7BrInR .9s .25s cubic-bezier(.22,.61,.36,1) both, ld7SwayB 13.5s 3s ease-in-out infinite alternate; }
-.ld7-tree-c { bottom: -1vh; left: -4vw; width: min(47vw, 40vh); height: auto;
+  animation: ld7BrIn 1.2s .55s ease both, ld7SwayB 10.8s 3.1s ease-in-out infinite alternate; }
+.ld7-tree-c { bottom: -5vh; left: -6vw; width: min(30vw, 24vh); height: auto;
   transform-origin: 0% 100%;
-  animation: ld7BrInL .95s .35s cubic-bezier(.22,.61,.36,1) both, ld7SwayC 10.5s 3.15s ease-in-out infinite alternate; }
-.ld7-tree-d { bottom: -1vh; right: -4vw; width: min(42vw, 32vh); height: auto;
+  animation: ld7BrIn 1.2s .6s ease both, ld7SwayC 8.5s 3.15s ease-in-out infinite alternate; }
+.ld7-tree-d { bottom: -5vh; right: -6vw; width: min(32vw, 24vh); height: auto;
   transform-origin: 100% 100%;
-  animation: ld7BrInR .95s .4s cubic-bezier(.22,.61,.36,1) both, ld7SwayD 9.5s 3.3s ease-in-out infinite alternate; }
+  animation: ld7BrIn 1.2s .65s ease both, ld7SwayD 8s 3.3s ease-in-out infinite alternate; }
 
-/* dahan "membuka": masuk dari sisi kiri / kanan sambil mengembang dari sudut */
-@keyframes ld7BrInL {
-  from { opacity: 0; transform: translate3d(-14vw, 0, 0) scale(.72) rotate(-2.5deg); }
-  to   { opacity: 1; transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+@keyframes ld7BrIn {
+  from { opacity: 0; transform: scale(.94); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
-@keyframes ld7BrInR {
-  from { opacity: 0; transform: translate3d(14vw, 0, 0) scale(.72) rotate(2.5deg); }
-  to   { opacity: 1; transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+/* ayunan 2 keyframe + alternate = kurva sinusoidal, tidak berhenti di tengah */
+@keyframes ld7SwayA {
+  from { transform: rotate(-1.2deg); }
+  to   { transform: rotate(1.8deg); }
 }
 
-@keyframes ld7SwayA { from { transform: rotate(0deg); } to { transform: rotate(-1.05deg); } }
-@keyframes ld7SwayB { from { transform: rotate(0deg); } to { transform: rotate(1deg); } }
-@keyframes ld7SwayC { from { transform: rotate(0deg); } to { transform: rotate(-1.25deg); } }
-@keyframes ld7SwayD { from { transform: rotate(0deg); } to { transform: rotate(1.3deg); } }
+@keyframes ld7SwayB {
+  from { transform: rotate(1.4deg); }
+  to   { transform: rotate(-2deg); }
+}
+
+@keyframes ld7SwayC {
+  from { transform: rotate(-1.6deg); }
+  to   { transform: rotate(2deg); }
+}
+
+@keyframes ld7SwayD {
+  from { transform: rotate(1.4deg); }
+  to   { transform: rotate(-1.9deg); }
+}
 
 .ld7-fl {
   transform-box: fill-box;
   transform-origin: 0% 50%;
-  animation: ld7Flut var(--fd, 4.4s) ease-in-out var(--fdl, -1s) infinite alternate;
+  animation: ld7Flut var(--fd, 3.2s) ease-in-out var(--fdl, -1s) infinite alternate;
 }
 
 @keyframes ld7Flut {
-  from { transform: rotate(calc(var(--fa, 2.6deg) * -1)); }
-  to   { transform: rotate(var(--fa, 2.6deg)); }
+  from { transform: rotate(calc(var(--fa, 6deg) * -1)); }
+  to   { transform: rotate(var(--fa, 6deg)); }
+}
+
+/* flutter lapis kedua: daun bergerak tidak sinkron dengan rantingnya */
+.ld7-fl2 {
+  transform-box: fill-box;
+  transform-origin: 18% 50%;
+  animation: ld7Flut2 var(--f2d, 2.1s) ease-in-out var(--f2l, 0s) infinite alternate;
+}
+
+@keyframes ld7Flut2 {
+  from { transform: rotate(calc(var(--f2a, 3deg) * -1)); }
+  to   { transform: rotate(var(--f2a, 3deg)); }
 }
 
 .ld7-bl {
@@ -313,12 +343,17 @@ button {
   width: clamp(76px, 12vmin, 118px);
   height: auto;
   filter: drop-shadow(0 0 18px rgba(255,240,212,.7));
-  animation: ld7SealIn 1.2s 2.05s cubic-bezier(.22,.61,.36,1) both;
+  animation: ld7SealIn 1.2s 2.05s cubic-bezier(.22,.61,.36,1) both, ld7SealGlow 5s 3.4s ease-in-out infinite alternate;
 }
 
 @keyframes ld7SealIn {
   from { opacity: 0; transform: translateY(12px) scale(1.14); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes ld7SealGlow {
+  from { filter: drop-shadow(0 0 12px rgba(255,240,212,.5)); }
+  to   { filter: drop-shadow(0 0 26px rgba(255,240,212,.85)); }
 }
 
 .ld7-spark {
@@ -397,43 +432,28 @@ button {
 
 @keyframes ld7VigIn { from { opacity: 0; } to { opacity: 1; } }
 
-/* ---------- tirai dedaunan: nutup layar → kebuka kiri/kanan ---------- */
-.ld7-cover {
+/* ---------- tirai pembuka: ranting lepas, TANPA panel / mask / blur ---------- */
+.ld7-cover-field {
   position: absolute;
-  top: 0;
-  width: 85vw;
+  inset: 0;
+  width: 100%;
   height: 100%;
   z-index: 5;
-  overflow: hidden;
+  overflow: visible;
   pointer-events: none;
 }
 
-.ld7-cover .ld7-tree { position: static; }
-.ld7-cover svg { display: block; width: 100%; height: 100%; }
-
-/* tepi dalam memudar halus — tidak ada garis kotak saat tirai bergeser */
-.ld7-cover--l {
-  left: 0;
-  -webkit-mask-image: linear-gradient(to right, #000 0%, #000 78%, transparent 100%);
-  mask-image: linear-gradient(to right, #000 0%, #000 78%, transparent 100%);
-  animation: ld7CoverL 1.5s .8s cubic-bezier(.62,0,.28,1) both;
-}
-
-.ld7-cover--r {
-  right: 0;
-  -webkit-mask-image: linear-gradient(to left, #000 0%, #000 78%, transparent 100%);
-  mask-image: linear-gradient(to left, #000 0%, #000 78%, transparent 100%);
-  animation: ld7CoverR 1.5s .8s cubic-bezier(.62,0,.28,1) both;
-}
+.ld7-cover-field--l { animation: ld7CoverL 1.9s .75s cubic-bezier(.62,0,.28,1) both; }
+.ld7-cover-field--r { animation: ld7CoverR 1.9s .75s cubic-bezier(.62,0,.28,1) both; }
 
 @keyframes ld7CoverL {
   from { transform: translate3d(0, 0, 0); }
-  to   { transform: translate3d(-108%, 0, 0); }
+  to   { transform: translate3d(-190%, 0, 0); }
 }
 
 @keyframes ld7CoverR {
   from { transform: translate3d(0, 0, 0); }
-  to   { transform: translate3d(108%, 0, 0); }
+  to   { transform: translate3d(190%, 0, 0); }
 }
 
 /* ---------- judul undangan di loader ---------- */
@@ -515,6 +535,284 @@ button {
 @keyframes flap {
   from { transform: scaleY(1); }
   to   { transform: scaleY(.52); }
+}
+
+
+/* ============================================================
+   V8 PRINTILAN CHINESE — simpul, lentera, koin, bangau, peoni,
+   awan gulung, bambu & debu emas (SVG murni, tanpa kotak)
+   ============================================================ */
+.ld8-decor,
+.ld8-bg-decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.ld8-decor { z-index: 3; }
+.ld8-bg-decor { z-index: 3; }
+
+/* --- simpul + rumbai: menggantung, ikut angin --- */
+.ld8-knot {
+  position: absolute;
+  width: var(--kw, 56px);
+  height: auto;
+  opacity: .85;
+  transform-origin: 50% 0%;
+  animation: ld8HangSway var(--kd, 8s) ease-in-out var(--kdl, 0s) infinite alternate;
+}
+
+.ld8-knot::before,
+.ld8-lantern::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 96%;
+  width: 1px;
+  height: var(--hang, 14vh);
+  transform: translateX(-50%);
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(244,223,160,0), rgba(244,223,160,.55));
+  opacity: .7;
+}
+
+.ld8-knot svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0 8px rgba(255, 214, 140, .35));
+}
+
+@keyframes ld8HangSway {
+  from { transform: rotate(-2.8deg); }
+  to   { transform: rotate(2.8deg); }
+}
+
+/* --- lentera kertas: menggantung, ikut angin --- */
+.ld8-lantern {
+  position: absolute;
+  width: var(--lw, 36px);
+  height: auto;
+  opacity: .9;
+  transform-origin: 50% 0%;
+  animation: ld8HangSway var(--ld, 8s) ease-in-out var(--ldl, 0s) infinite alternate;
+}
+
+.ld8-lantern svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@keyframes ld8LanternGlow {
+  from { filter: drop-shadow(0 0 8px rgba(255, 150, 90, .35)); }
+  to   { filter: drop-shadow(0 0 20px rgba(255, 170, 110, .7)); }
+}
+
+/* --- koin berputar --- */
+.ld8-coin {
+  position: absolute;
+  width: var(--cw, 16px);
+  height: auto;
+  opacity: 0;
+  will-change: transform;
+  animation: ld8CoinDrift var(--cd, 20s) linear var(--cdl, 0s) infinite;
+}
+
+.ld8-coin svg { display: block; width: 100%; height: auto; }
+
+@keyframes ld8CoinDrift {
+  0%   { transform: translate3d(0, 14vh, 0) rotateY(0deg) rotate(8deg); opacity: 0; }
+  12%  { opacity: var(--co, .5); }
+  50%  { transform: translate3d(calc(var(--cdx, 4vw) * .5), -45vh, 0) rotateY(360deg) rotate(-6deg); }
+  88%  { opacity: var(--co, .5); }
+  100% { transform: translate3d(var(--cdx, 4vw), -112vh, 0) rotateY(720deg) rotate(8deg); opacity: 0; }
+}
+
+/* --- bangau melayang --- */
+.ld8-crane {
+  position: absolute;
+  top: var(--crt, 18%);
+  left: -24vw;
+  width: var(--crw, 110px);
+  height: auto;
+  opacity: 0;
+  will-change: transform;
+  animation: ld8CraneFly var(--crd, 46s) linear var(--crdl, 0s) infinite;
+}
+
+.ld8-crane svg { display: block; width: 100%; height: auto; }
+.ld8-crane--bg { filter: drop-shadow(0 0 10px rgba(244, 223, 160, .3)); }
+.ld8-crane--bg svg { opacity: .8; }
+
+@keyframes ld8CraneFly {
+  0%   { transform: translate3d(0, 0, 0) scale(.9); opacity: 0; }
+  10%  { opacity: .8; }
+  50%  { transform: translate3d(62vw, -3vh, 0) scale(1); }
+  90%  { opacity: .8; }
+  100% { transform: translate3d(128vw, 2vh, 0) scale(.9); opacity: 0; }
+}
+
+/* --- awan gulung --- */
+.ld8-scroll {
+  position: absolute;
+  width: var(--scw, 150px);
+  height: auto;
+  opacity: var(--sco, .35);
+  animation: ld8ScrollDrift var(--scd, 30s) ease-in-out var(--scdl, 0s) infinite alternate;
+}
+
+.ld8-scroll svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: scaleX(var(--scr, 1));
+}
+
+@keyframes ld8ScrollDrift {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(3vw, -1.4vh, 0); }
+}
+
+/* --- bambu --- */
+.ld8-bamboo {
+  position: absolute;
+  bottom: -2vh;
+  width: var(--bw, 88px);
+  height: auto;
+  opacity: .5;
+  transform-origin: 50% 100%;
+  animation: ld8BambooSway var(--bd, 12s) ease-in-out var(--bdl, 0s) infinite alternate;
+}
+
+.ld8-bamboo--flip { transform: scaleX(-1); }
+.ld8-bamboo svg { display: block; width: 100%; height: auto; }
+
+@keyframes ld8BambooSway {
+  from { transform: rotate(-1.8deg); }
+  to   { transform: rotate(1.8deg); }
+}
+
+/* --- debu emas --- */
+.ld8-dust {
+  position: absolute;
+  bottom: -8px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #F7DE9A;
+  box-shadow: 0 0 7px 1px rgba(247, 222, 154, .8);
+  opacity: 0;
+  animation: ld8DustFloat var(--dd, 11s) linear var(--ddl, 0s) infinite;
+}
+
+@keyframes ld8DustFloat {
+  0%   { transform: translate3d(0, 6vh, 0); opacity: 0; }
+  18%  { opacity: .75; }
+  82%  { opacity: .55; }
+  100% { transform: translate3d(var(--ddx, 3vw), -104vh, 0); opacity: 0; }
+}
+
+@media (max-width: 767px) {
+  .ld8-knot { opacity: .7; }
+  .ld8-lantern { opacity: .8; }
+  .ld8-crane--bg:nth-of-type(2) { display: none; }
+}
+
+/* kemunculan bertahap untuk printilan tambahan */
+.ld8-late {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  animation: ld8Appear 1.5s var(--lat, 4s) cubic-bezier(.22,.61,.36,1) forwards;
+}
+
+@keyframes ld8Appear {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* bintang emas berkedip */
+.ld8-star {
+  position: absolute;
+  width: var(--sts, 12px);
+  height: var(--sts, 12px);
+  opacity: 0;
+  animation: ld8StarTwinkle var(--std, 3.5s) var(--stdl, 0s) ease-in-out infinite alternate;
+}
+
+.ld8-star svg { display: block; width: 100%; height: 100%; }
+
+@keyframes ld8StarTwinkle {
+  from { opacity: .25; transform: scale(.65) rotate(-12deg); }
+  to   { opacity: 1; transform: scale(1.1) rotate(14deg); }
+}
+
+/* kupu-kupu: sayap berkedip, terbang berliku */
+.ld8-butterfly {
+  position: absolute;
+  width: var(--bf, 20px);
+  height: auto;
+  opacity: 0;
+  animation: ld8ButterflyFly var(--bfd, 8s) linear var(--bfl, 0s) infinite;
+}
+
+.ld8-butterfly svg { display: block; width: 100%; height: auto; overflow: visible; }
+
+.ld8-wing { transform-box: fill-box; }
+.ld8-wing--l { transform-origin: 100% 50%; animation: ld8WingL .38s ease-in-out infinite alternate; }
+.ld8-wing--r { transform-origin: 0% 50%; animation: ld8WingR .38s ease-in-out infinite alternate; }
+
+@keyframes ld8WingL {
+  from { transform: rotate(-14deg) scaleX(1); }
+  to   { transform: rotate(18deg) scaleX(.6); }
+}
+
+@keyframes ld8WingR {
+  from { transform: rotate(14deg) scaleX(1); }
+  to   { transform: rotate(-18deg) scaleX(.6); }
+}
+
+@keyframes ld8ButterflyFly {
+  0%   { transform: translate3d(-7vw, 4vh, 0) rotate(-8deg); opacity: 0; }
+  12%  { opacity: .9; }
+  36%  { transform: translate3d(11vw, -3vh, 0) rotate(12deg); }
+  64%  { transform: translate3d(27vw, 5vh, 0) rotate(-11deg); }
+  88%  { opacity: .9; }
+  100% { transform: translate3d(50vw, -4vh, 0) rotate(7deg); opacity: 0; }
+}
+
+/* daun ginkgo berjatuhan */
+.ld8-ginkgo {
+  position: absolute;
+  width: var(--gk, 14px);
+  height: auto;
+  opacity: 0;
+  animation: ld8GinkgoFall var(--gd, 16s) linear var(--gdl, 0s) infinite;
+}
+
+.ld8-ginkgo svg { display: block; width: 100%; height: auto; }
+
+@keyframes ld8GinkgoFall {
+  0%   { transform: translate3d(0, -8vh, 0) rotate(-25deg); opacity: 0; }
+  12%  { opacity: .7; }
+  45%  { transform: translate3d(var(--gdx, 4vw), 38vh, 0) rotate(65deg); }
+  75%  { transform: translate3d(calc(var(--gdx, 4vw) * -.4), 72vh, 0) rotate(150deg); opacity: .6; }
+  100% { transform: translate3d(var(--gdx, 4vw), 112vh, 0) rotate(260deg); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ld8-coin,
+  .ld8-crane,
+  .ld8-dust,
+  .ld8-scroll,
+  .ld8-bamboo,
+  .ld8-star,
+  .ld8-late,
+  .ld8-butterfly,
+  .ld8-ginkgo { display: none; }
+  .ld8-knot svg,
+  .ld8-lantern svg { animation: none; }
 }
 
 /* ============================================================
@@ -1267,16 +1565,19 @@ button {
 
 .couple-card {
   text-align: center;
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
-  border-radius: 20px;
-  padding: 38px 30px;
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(30, 8, 12, .32);
+  border: none;
+  border-radius: 16px;
+  padding: 28px 22px;
+  box-shadow: 0 12px 30px rgba(12, 3, 5, .28);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   transition: var(--transition);
   position: relative;
   overflow: hidden;
+  width: 100%;
+  max-width: 320px;
+  margin-inline: auto;
 }
 
 .couple-card::before {
@@ -1285,25 +1586,24 @@ button {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 46%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  width: 30%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(244,223,160,.55), transparent);
 }
 
 .couple-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-hover);
-  border-color: rgba(244, 223, 160, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(12, 3, 5, .38);
 }
 
 .couple-img-wrapper {
-  width: 190px;
-  height: 190px;
-  margin: 0 auto 22px;
+  width: 158px;
+  height: 158px;
+  margin: 0 auto 16px;
   border-radius: 50%;
-  padding: 5px;
-  background: linear-gradient(150deg, var(--gold-light), var(--gold-deep));
-  box-shadow: 0 10px 30px rgba(12, 3, 5, 0.5), 0 0 0 6px rgba(244, 223, 160, 0.07);
+  padding: 4px;
+  background: linear-gradient(150deg, rgba(244,223,160,.85), rgba(168,120,31,.85));
+  box-shadow: 0 8px 22px rgba(12, 3, 5, .4), 0 0 0 4px rgba(244, 223, 160, .05);
   transition: var(--transition);
 }
 
@@ -1580,6 +1880,9 @@ button {
   transition: var(--transition);
   position: relative;
   overflow: hidden;
+  width: 100%;
+  max-width: 360px;
+  margin-inline: auto;
 }
 
 .event-card::after {
@@ -2875,6 +3178,7 @@ section[id] {
   top: -12px;
   width: clamp(180px, 26vw, 350px);
   height: auto;
+  overflow: visible;
   pointer-events: none;
   filter: drop-shadow(0 8px 20px rgba(0,0,0,.38));
   transform-box: view-box;
@@ -2963,6 +3267,11 @@ section[id] {
 
 .hero-frame-seal--top    { top: -19px; }
 .hero-frame-seal--bottom { bottom: -19px; }
+
+@media (max-width: 767px) {
+  .hero-frame-seal--top    { top: 72px; }
+  .hero-frame-seal--bottom { bottom: -6px; }
+}
 
 /* ============================================================
    TRANSISI LOADER → HERO (body.loader-done)
@@ -3071,26 +3380,27 @@ body.loader-done .music-control {
 
 .cn-birds {
   position: absolute;
-  width: 200px;
-  opacity: .85;
+  width: 240px;
+  opacity: .9;
 }
 
 .cn-birds path {
-  stroke: #1B0B11;
+  stroke: #F4DFA0;
+  stroke-width: 2.4;
 }
 
 .cn-birds--a {
   top: 13%;
-  right: -230px;
-  animation: birdsCrossL 58s 2s linear infinite;
+  right: -260px;
+  animation: birdsCrossL 34s 2s linear infinite;
 }
 
 .cn-birds--b {
-  top: 29%;
-  left: -230px;
-  width: 150px;
-  opacity: .55;
-  animation: birdsCrossR 76s 14s linear infinite;
+  top: 31%;
+  left: -260px;
+  width: 190px;
+  opacity: .7;
+  animation: birdsCrossR 42s 14s linear infinite;
 }
 
 @keyframes birdsCrossL {
@@ -3194,3 +3504,238 @@ body.loader-done .music-control {
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.13'/%3E%3C/svg%3E");
   background-size: auto, auto, 280px 280px;
 }
+
+
+/* ============================================================
+   V9B — RAPIH & AMAN (override terakhir; galeri tidak disentuh)
+   ============================================================ */
+
+/* kelopak jatuh tetap di BELAKANG konten utama */
+.cn-petals { z-index: 0 !important; }
+
+/* border: hanya diredupkan lewat variabel — struktur kartu tidak diubah */
+:root {
+  --glass: rgba(30, 8, 12, .42);
+  --glass-border: rgba(244, 223, 160, .16);
+}
+
+.event-card,
+.timeline-content { border-radius: 22px; }
+
+/* semua elemen latar ikut bergerak halus & natural */
+.cn-ridge--far  { animation: ld9RidgeDrift 46s ease-in-out infinite alternate; }
+.cn-ridge--near { animation: ld9RidgeDrift 38s -7s ease-in-out infinite alternate-reverse; }
+
+@keyframes ld9RidgeDrift {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-2.2vw, -6px, 0); }
+}
+
+.cn-pagoda {
+  transform-origin: 50% 100%;
+  animation: ld9PagodaSway 13s ease-in-out infinite alternate;
+}
+.cn-pagoda--right { animation-duration: 16s; animation-delay: -5s; }
+
+@keyframes ld9PagodaSway {
+  from { transform: rotate(-.55deg) translateY(0); }
+  to   { transform: rotate(.55deg) translateY(-3px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cn-ridge--far,
+  .cn-ridge--near,
+  .cn-pagoda { animation: none !important; }
+}
+
+/* ============================================================
+   V18 — KIPAS, DAHAN & NAGA MUNCUL SETELAH TIRAI TERBUKA (loader)
+   ============================================================ */
+.ld8-after {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0;
+  animation: ld8AfterIn 1.8s 2.3s ease both;
+}
+
+@keyframes ld8AfterIn {
+  from { opacity: 0; transform: scale(1.02); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.ld8-after-branch {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: min(18vw, 220px);
+  overflow: visible;
+  opacity: .85;
+  transform-origin: 50% 50%;
+  animation: ld8BranchSway 14s ease-in-out infinite alternate;
+}
+
+@keyframes ld8BranchSway {
+  from { transform: rotate(-.6deg) translateY(0); }
+  to   { transform: rotate(.6deg) translateY(-3px); }
+}
+
+.ld8-after-branch--l { left: -12vw; }
+.ld8-after-branch--r {
+  right: -10vw;
+  animation: ld8BranchSwayR 17s -6s ease-in-out infinite alternate;
+}
+
+@keyframes ld8BranchSwayR {
+  from { transform: scaleX(-1) rotate(.6deg) translateY(0); }
+  to   { transform: scaleX(-1) rotate(-.6deg) translateY(-3px); }
+}
+
+/* kipas miring, bergoyang — tidak berdiri vertikal */
+.cn-fan {
+  position: absolute;
+  width: var(--fw, 110px);
+  height: auto;
+  opacity: .72;
+  pointer-events: none;
+  transform: rotate(var(--fr, 0deg));
+}
+
+/* tali pendek mengaitkan kipas ke ranting di atasnya */
+.cn-fan::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 84%;
+  width: 1px;
+  height: 7vh;
+  background: linear-gradient(180deg, rgba(244,223,160,0), rgba(244,223,160,.7));
+  transform: translateX(-50%);
+}
+
+.cn-fan svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  transform-origin: 50% 88%;
+  animation: cnFanSway var(--fd, 13s) ease-in-out var(--fdl, 0s) infinite alternate;
+}
+
+@keyframes cnFanSway {
+  from { transform: rotate(-2.5deg); }
+  to   { transform: rotate(2.5deg); }
+}
+
+/* naga masuk dari kanan & kiri setelah tirai terbuka */
+.ld8-dragon {
+  position: absolute;
+  width: clamp(320px, 42vw, 620px);
+  height: auto;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ld8-dragon--r {
+  top: 12%;
+  right: -8%;
+  animation: ld8DragonR 3s 2.5s cubic-bezier(.22,.61,.36,1) both,
+             dragonDrift 17s 5.5s ease-in-out infinite alternate;
+}
+
+.ld8-dragon--l {
+  top: 52%;
+  left: -8%;
+  width: clamp(260px, 34vw, 480px);
+  animation: ld8DragonL 3.2s 2.8s cubic-bezier(.22,.61,.36,1) both,
+             dragonDrift 22s 6s ease-in-out infinite alternate;
+}
+
+@keyframes ld8DragonR {
+  from { transform: translate3d(72vw, 0, 0); opacity: 0; }
+  to   { transform: translate3d(0, 0, 0); opacity: .2; }
+}
+
+@keyframes ld8DragonL {
+  from { transform: translate3d(-72vw, 0, 0); opacity: 0; }
+  to   { transform: translate3d(0, 0, 0); opacity: .16; }
+}
+
+@media (max-width: 767px) {
+  .ld8-after-branch { width: 14vw; opacity: .74; }
+  .cn-fan { opacity: .5; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cn-fan svg,
+  .ld8-dragon { animation: none !important; }
+}
+
+/* daun pengunci kipas agar terasa tumbuh dari ranting */
+.cn-fan-leaf {
+  position: absolute;
+  left: -32%;
+  top: -34%;
+  width: 164%;
+  height: 168%;
+  opacity: .85;
+  pointer-events: none;
+}
+
+/* burung di loading: terang, terbang jelas setelah tirai terbuka */
+.ld8-bird {
+  position: absolute;
+  width: 190px;
+  height: auto;
+  pointer-events: none;
+  opacity: 0;
+  overflow: visible;
+}
+
+.ld8-bird path { stroke: #4A3026; stroke-width: 2.6; }
+
+.ld8-bird--a {
+  top: 14%;
+  left: -20vw;
+  animation: ld8BirdFly 30s 2.5s linear infinite;
+}
+
+.ld8-bird--b {
+  top: 33%;
+  right: -22vw;
+  width: 150px;
+  animation: ld8BirdFlyR 38s 7s linear infinite;
+}
+
+@keyframes ld8BirdFly {
+  0%   { transform: translate3d(0, 0, 0); opacity: 0; }
+  10%  { opacity: .9; }
+  88%  { opacity: .9; }
+  100% { transform: translate3d(135vw, -5vh, 0); opacity: 0; }
+}
+
+@keyframes ld8BirdFlyR {
+  0%   { transform: translate3d(0, 0, 0); opacity: 0; }
+  10%  { opacity: .75; }
+  88%  { opacity: .75; }
+  100% { transform: translate3d(-135vw, 4vh, 0); opacity: 0; }
+}
+
+@keyframes ld7GateGlow {
+  0%   { opacity: 0; transform: scale(.5); }
+  45%  { opacity: 1; transform: scale(1.4); }
+  100% { opacity: .75; transform: scale(1.15); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ld7-gate-door,
+  .ld7-gate-glow { animation: none; }
+}
+
+/* semua SVG daun: tidak ada yang terpotong */
+.cn-fan-leaf,
+.ld7-cover-field,
+.ld8-after-branch,
+.ld7-tree,
+.cn-branch { overflow: visible; }
