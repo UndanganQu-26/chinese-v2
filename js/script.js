@@ -6,15 +6,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let loaderHidden = false;
 
+  document.body.classList.add('body-locked');
+
+  function blockLoaderScroll(e) {
+    if (!loaderHidden) e.preventDefault();
+  }
+  window.addEventListener('wheel', blockLoaderScroll, { passive: false });
+  window.addEventListener('touchmove', blockLoaderScroll, { passive: false });
+  window.addEventListener('scroll', () => {
+    if (!loaderHidden && window.scrollY !== 0) window.scrollTo(0, 0);
+  });
+
   function hideLoader() {
     if (loaderHidden) return;
     loaderHidden = true;
     if (loader) loader.classList.add('hidden');
     document.body.classList.add('loader-done');
+    document.body.classList.remove('body-locked');
+    document.documentElement.classList.remove('loader-lock');
     window.clearTimeout(loaderTimer);
   }
 
-  const loaderTimer = window.setTimeout(hideLoader, reduceMotion ? 150 : 11500);
+  const loaderTimer = window.setTimeout(hideLoader, reduceMotion ? 150 : 15400);
 
   if (loader) {
     loader.addEventListener('click', hideLoader);
@@ -144,12 +157,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelectorAll('.nav-link');
 
   navToggle.addEventListener('click', () => {
+    if (!loaderHidden) return;
     navToggle.classList.toggle('active');
     navMenu.classList.toggle('active');
   });
 
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
+      if (!loaderHidden) return;
       e.preventDefault();
       navToggle.classList.remove('active');
       navMenu.classList.remove('active');

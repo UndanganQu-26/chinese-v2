@@ -117,6 +117,7 @@ button {
   inset: 0;
   overflow: hidden;
   transform-origin: 50% 44%;
+  will-change: transform;
   animation: ld7SceneIn 1.5s cubic-bezier(.22,.61,.36,1) both,
              ld7Enter 1.9s 10s cubic-bezier(.45,0,.3,1) forwards;
 }
@@ -182,9 +183,11 @@ button {
 @keyframes ld7DriftB  { from { transform: translate3d(0,0,0); } to { transform: translate3d(-17px,4px,0); } }
 
 .ld7-curl {
+  --fo: 1;
   stroke-dasharray: 640;
   stroke-dashoffset: 640;
-  animation: ld7CurlIn 2.1s 1s ease forwards;
+  animation: ld8AssetIn .8s 1.7s both,
+             ld7CurlIn 2.1s 1.7s ease forwards;
 }
 
 @keyframes ld7CurlIn { to { stroke-dashoffset: 0; } }
@@ -260,16 +263,16 @@ button {
 
 .ld7-tree-a { top: -4vh; left: -6vw; width: min(46vw, 54vh); height: auto;
   transform-origin: 0% 0%;
-  animation: ld7BrIn 1.2s .5s ease both, ld7SwayA 9.5s 3s ease-in-out infinite alternate; }
+  animation: ld7BrIn 1.2s 1.8s ease both, ld7SwayA 9.5s 3s ease-in-out infinite alternate; }
 .ld7-tree-b { top: -4vh; right: -6vw; width: min(42vw, 48vh); height: auto;
   transform-origin: 100% 0%;
-  animation: ld7BrIn 1.2s .55s ease both, ld7SwayB 10.8s 3.1s ease-in-out infinite alternate; }
+  animation: ld7BrIn 1.2s 1.9s ease both, ld7SwayB 10.8s 3.1s ease-in-out infinite alternate; }
 .ld7-tree-c { bottom: -5vh; left: -6vw; width: min(30vw, 24vh); height: auto;
   transform-origin: 0% 100%;
-  animation: ld7BrIn 1.2s .6s ease both, ld7SwayC 8.5s 3.15s ease-in-out infinite alternate; }
+  animation: ld7BrIn 1.2s 2s ease both, ld7SwayC 8.5s 3.15s ease-in-out infinite alternate; }
 .ld7-tree-d { bottom: -5vh; right: -6vw; width: min(32vw, 24vh); height: auto;
   transform-origin: 100% 100%;
-  animation: ld7BrIn 1.2s .65s ease both, ld7SwayD 8s 3.3s ease-in-out infinite alternate; }
+  animation: ld7BrIn 1.2s 2.1s ease both, ld7SwayD 8s 3.3s ease-in-out infinite alternate; }
 
 @keyframes ld7BrIn {
   from { opacity: 0; transform: scale(.94); }
@@ -343,7 +346,7 @@ button {
   width: clamp(76px, 12vmin, 118px);
   height: auto;
   filter: drop-shadow(0 0 18px rgba(255,240,212,.7));
-  animation: ld7SealIn 1.2s 2.05s cubic-bezier(.22,.61,.36,1) both, ld7SealGlow 5s 3.4s ease-in-out infinite alternate;
+  animation: ld7SealIn 1.2s 11.9s cubic-bezier(.22,.61,.36,1) both, ld7SealGlow 5s 3.4s ease-in-out infinite alternate;
 }
 
 @keyframes ld7SealIn {
@@ -375,19 +378,17 @@ button {
 
 /* ---------- kelopak berjatuhan ---------- */
 .ld7-petal {
+  --fo: var(--o, .85);
   position: absolute;
   left: var(--x, 50%);
   top: -8vh;
   width: var(--w, 16px);
   height: var(--w, 16px);
-  opacity: var(--o, .85);
+  opacity: 0;
   pointer-events: none;
   will-change: transform;
-  animation-name: var(--kv, ld7FallA);
-  animation-duration: var(--d, 11s);
-  animation-timing-function: linear;
-  animation-delay: var(--dl, -3s);
-  animation-iteration-count: infinite;
+  animation: ld8AssetIn .8s 1.8s both,
+             var(--kv, ld7FallA) var(--d, 11s) linear 1.8s infinite;
 }
 
 .ld7-petal svg {
@@ -433,29 +434,6 @@ button {
 @keyframes ld7VigIn { from { opacity: 0; } to { opacity: 1; } }
 
 /* ---------- tirai pembuka: ranting lepas, TANPA panel / mask / blur ---------- */
-.ld7-cover-field {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 5;
-  overflow: visible;
-  pointer-events: none;
-}
-
-.ld7-cover-field--l { animation: ld7CoverL 1.9s .75s cubic-bezier(.62,0,.28,1) both; }
-.ld7-cover-field--r { animation: ld7CoverR 1.9s .75s cubic-bezier(.62,0,.28,1) both; }
-
-@keyframes ld7CoverL {
-  from { transform: translate3d(0, 0, 0); }
-  to   { transform: translate3d(-190%, 0, 0); }
-}
-
-@keyframes ld7CoverR {
-  from { transform: translate3d(0, 0, 0); }
-  to   { transform: translate3d(190%, 0, 0); }
-}
-
 /* ---------- judul undangan di loader ---------- */
 .ld7-titles {
   position: absolute;
@@ -477,7 +455,7 @@ button {
   color: #B8893B;
   margin: 0 0 1.2vh;
   opacity: 0;
-  animation: ld7TitleIn .9s 2.25s cubic-bezier(.22,.61,.36,1) both;
+  animation: ld7TitleIn 1.2s 11.9s cubic-bezier(.22,.61,.36,1) both;
 }
 
 .ld7-names {
@@ -489,7 +467,7 @@ button {
   text-shadow: 0 3px 22px rgba(255,246,228,.9);
   margin: 0 0 1.6vh;
   opacity: 0;
-  animation: ld7TitleIn 1s 2.45s cubic-bezier(.22,.61,.36,1) both;
+  animation: ld7TitleIn 1.2s 12.08s cubic-bezier(.22,.61,.36,1) both;
 }
 
 .ld7-amp {
@@ -507,15 +485,37 @@ button {
   text-shadow: 0 1px 10px rgba(255,248,232,.9);
   margin: 0;
   opacity: 0;
-  animation: ld7TitleIn 1s 2.75s cubic-bezier(.22,.61,.36,1) both;
+  animation: ld7TitleIn 1.2s 12.26s cubic-bezier(.22,.61,.36,1) both;
+}
+
+.ld7-date {
+  font-family: var(--font-cn2);
+  font-size: clamp(16px, 2.2vw, 21px);
+  letter-spacing: 8px;
+  padding-left: 8px;
+  color: #8E6A2C;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 1px 10px rgba(255,248,232,.9);
+  margin: 1.5vh 0 0;
+  opacity: 0;
+  animation: ld7TitleIn 1.2s 12.44s cubic-bezier(.22,.61,.36,1) both;
 }
 
 @media (max-width: 767px) {
   .ld7-titles { top: 43%; }
+  .ld7-names { font-size: 36px; }
+  .ld7-eyebrow { letter-spacing: 4.5px; }
+  .ld7-date { letter-spacing: 6px; margin-top: 1.2vh; }
+  .cn-fan--mid-r { display: none; }
+}
+
+@media (max-width: 340px) {
+  .ld7-names { font-size: 34px; }
+  .ld8-photo-flower { width: 138px; }
 }
 
 @keyframes ld7TitleIn {
-  from { opacity: 0; transform: translateY(16px); }
+  from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
@@ -590,12 +590,14 @@ button {
 
 /* --- lentera kertas: menggantung, ikut angin --- */
 .ld8-lantern {
+  --fo: .9;
   position: absolute;
   width: var(--lw, 36px);
   height: auto;
-  opacity: .9;
+  opacity: var(--fo);
   transform-origin: 50% 0%;
-  animation: ld8HangSway var(--ld, 8s) ease-in-out var(--ldl, 0s) infinite alternate;
+  animation: ld8AssetIn .8s 1.6s both,
+             ld8HangSway var(--ld, 8s) ease-in-out var(--ldl, 0s) infinite alternate;
 }
 
 .ld8-lantern svg {
@@ -3276,6 +3278,14 @@ section[id] {
 /* ============================================================
    TRANSISI LOADER → HERO (body.loader-done)
    ============================================================ */
+/* kunci penuh saat loader: tidak ada scroll & tidak ada konten bocor */
+body.body-locked {
+  overflow: hidden !important;
+}
+body:not(.loader-done) > *:not(#loader):not(svg):not(script) {
+  visibility: hidden !important;
+}
+
 body.loader-done .hero {
   animation: heroZoomIn 1.6s cubic-bezier(.22,.61,.36,1) both;
 }
@@ -3557,6 +3567,7 @@ body.loader-done .music-control {
   z-index: 4;
   pointer-events: none;
   opacity: 0;
+  will-change: opacity, transform;
   animation: ld8AfterIn 1.8s 2.3s ease both;
 }
 
@@ -3565,13 +3576,48 @@ body.loader-done .music-control {
   to   { opacity: 1; transform: scale(1); }
 }
 
+/* rangkaian bunga foto di sisi kiri/kanan */
+.ld8-photo-flower {
+  position: absolute;
+  z-index: -1;
+  width: clamp(210px, 30vw, 430px);
+  height: auto;
+  --fo: 1;
+  opacity: var(--fo);
+  pointer-events: none;
+  backface-visibility: hidden;
+  animation: ld8AssetIn 1s ease var(--ffd, 2.6s) both;
+}
+@keyframes ld8AssetIn {
+  from { opacity: 0; }
+  to   { opacity: var(--fo); }
+}
+.ld8-photo-flower--a { top: 17%; }
+.ld8-photo-flower--b { top: 45%; }
+.ld8-photo-flower--c { top: 73%; }
+.ld8-photo-flower--l { left: -7%; transform: rotate(-14deg); }
+.ld8-photo-flower--r { right: -7%; transform: scaleX(-1) rotate(-14deg); }
+.ld8-photo-flower--l.ld8-photo-flower--a { --ffd: 2.5s; }
+.ld8-photo-flower--r.ld8-photo-flower--a { --ffd: 2.8s; }
+.ld8-photo-flower--l.ld8-photo-flower--b { --ffd: 3.1s; }
+.ld8-photo-flower--r.ld8-photo-flower--b { --ffd: 3.4s; }
+.ld8-photo-flower--l.ld8-photo-flower--c { --ffd: 3.7s; }
+.ld8-photo-flower--r.ld8-photo-flower--c { --ffd: 4s; }
+
+@media (max-width: 767px) {
+  .ld8-photo-flower { width: clamp(130px, 48vw, 195px); --fo: .97; }
+  .ld8-photo-flower--l { left: -18%; }
+  .ld8-photo-flower--r { right: -18%; }
+  .ld8-photo-flower--b { display: none; }
+}
+
 .ld8-after-branch {
   position: absolute;
   top: 0;
   height: 100%;
-  width: min(18vw, 220px);
+  width: min(16vw, 190px);
   overflow: visible;
-  opacity: .85;
+  opacity: 1;
   transform-origin: 50% 50%;
   animation: ld8BranchSway 14s ease-in-out infinite alternate;
 }
@@ -3581,15 +3627,44 @@ body.loader-done .music-control {
   to   { transform: rotate(.6deg) translateY(-3px); }
 }
 
-.ld8-after-branch--l { left: -12vw; }
+.ld8-after-branch--l { left: -0.25vw; }
 .ld8-after-branch--r {
-  right: -10vw;
+  right: -0.25vw;
   animation: ld8BranchSwayR 17s -6s ease-in-out infinite alternate;
 }
 
 @keyframes ld8BranchSwayR {
-  from { transform: scaleX(-1) rotate(.6deg) translateY(0); }
-  to   { transform: scaleX(-1) rotate(-.6deg) translateY(-3px); }
+  from { transform: rotate(.6deg) translateY(0); }
+  to   { transform: rotate(-.6deg) translateY(-3px); }
+}
+
+/* angin pelan pada setiap gugus daun & bunga */
+.cn-wind {
+  transform-box: fill-box;
+  transform-origin: 0% 100%;
+  animation: cnWindSway var(--wd, 11s) cubic-bezier(.37, 0, .63, 1) var(--wdl, 0s) infinite alternate;
+}
+
+.cn-wind--r { transform-origin: 100% 100%; }
+
+@keyframes cnWindSway {
+  from { transform: rotate(calc(var(--wa, 1deg) * -1)) translateY(0); }
+  to   { transform: rotate(var(--wa, 1deg)) translateY(-1.2px); }
+}
+
+/* burung hinggap: kaki tetap menempel di ranting, hanya bergoyang halus */
+.cn-perch-bird {
+  --fo: 1;
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  filter: drop-shadow(0 1px 1px rgba(58, 43, 34, .22));
+  animation: ld8AssetIn .9s ease var(--bfd, 3.8s) both,
+             cnPerchBob var(--pbd, 5s) ease-in-out var(--pbdl, 0s) infinite alternate;
+}
+
+@keyframes cnPerchBob {
+  from { transform: rotate(-1.6deg) translateY(0); }
+  to   { transform: rotate(1.6deg) translateY(-.8px); }
 }
 
 /* kipas miring, bergoyang — tidak berdiri vertikal */
@@ -3597,21 +3672,9 @@ body.loader-done .music-control {
   position: absolute;
   width: var(--fw, 110px);
   height: auto;
-  opacity: .72;
+  opacity: 1;
   pointer-events: none;
   transform: rotate(var(--fr, 0deg));
-}
-
-/* tali pendek mengaitkan kipas ke ranting di atasnya */
-.cn-fan::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  bottom: 84%;
-  width: 1px;
-  height: 7vh;
-  background: linear-gradient(180deg, rgba(244,223,160,0), rgba(244,223,160,.7));
-  transform: translateX(-50%);
 }
 
 .cn-fan svg {
@@ -3663,69 +3726,43 @@ body.loader-done .music-control {
 }
 
 @media (max-width: 767px) {
-  .ld8-after-branch { width: 14vw; opacity: .74; }
-  .cn-fan { opacity: .5; }
+  .ld8-after-branch { width: 13vw; opacity: 1; }
+  .cn-fan { opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .cn-fan svg,
+  .cn-perch-bird,
+  .cn-wind,
+  .ld8-after-branch,
+  .ld8-photo-flower,
   .ld8-dragon { animation: none !important; }
 }
 
-/* daun pengunci kipas agar terasa tumbuh dari ranting */
-.cn-fan-leaf {
-  position: absolute;
-  left: -32%;
-  top: -34%;
-  width: 164%;
-  height: 168%;
-  opacity: .85;
-  pointer-events: none;
+/* pintu pagoda: terlihat jelas & menyatu dengan gedung, lalu buka smooth sebelum zoom */
+.ld7-gate-door {
+  transform-box: fill-box;
+  animation: ld7GateOpen 2s 8s cubic-bezier(.22,.61,.36,1) both;
 }
 
-/* burung di loading: terang, terbang jelas setelah tirai terbuka */
-.ld8-bird {
-  position: absolute;
-  width: 190px;
-  height: auto;
-  pointer-events: none;
+/* dua daun pintu: masing-masing berengsel di sisi luar, membuka ke kiri & kanan */
+.ld7-gate-door--l { transform-origin: 0% 100%; }
+.ld7-gate-door--r { transform-origin: 100% 100%; }
+
+@keyframes ld7GateOpen {
+  from { transform: scaleX(1); }
+  to   { transform: scaleX(.08); }
+}
+
+.ld7-gate-glow {
   opacity: 0;
-  overflow: visible;
-}
-
-.ld8-bird path { stroke: #4A3026; stroke-width: 2.6; }
-
-.ld8-bird--a {
-  top: 14%;
-  left: -20vw;
-  animation: ld8BirdFly 30s 2.5s linear infinite;
-}
-
-.ld8-bird--b {
-  top: 33%;
-  right: -22vw;
-  width: 150px;
-  animation: ld8BirdFlyR 38s 7s linear infinite;
-}
-
-@keyframes ld8BirdFly {
-  0%   { transform: translate3d(0, 0, 0); opacity: 0; }
-  10%  { opacity: .9; }
-  88%  { opacity: .9; }
-  100% { transform: translate3d(135vw, -5vh, 0); opacity: 0; }
-}
-
-@keyframes ld8BirdFlyR {
-  0%   { transform: translate3d(0, 0, 0); opacity: 0; }
-  10%  { opacity: .75; }
-  88%  { opacity: .75; }
-  100% { transform: translate3d(-135vw, 4vh, 0); opacity: 0; }
+  animation: ld7GateGlow 3s 7.8s ease both;
 }
 
 @keyframes ld7GateGlow {
-  0%   { opacity: 0; transform: scale(.5); }
-  45%  { opacity: 1; transform: scale(1.4); }
-  100% { opacity: .75; transform: scale(1.15); }
+  0%   { opacity: 0; transform: scale(.55); }
+  40%  { opacity: 1; transform: scale(1.25); }
+  100% { opacity: .8; transform: scale(1); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -3734,8 +3771,6 @@ body.loader-done .music-control {
 }
 
 /* semua SVG daun: tidak ada yang terpotong */
-.cn-fan-leaf,
-.ld7-cover-field,
 .ld8-after-branch,
 .ld7-tree,
 .cn-branch { overflow: visible; }
