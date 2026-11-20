@@ -30,6 +30,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
+  <audio id="bgMusic" src="assets/music/Yue%20liang%20dai%20biao%20wo%20de%20xin%20%E6%9C%88%E4%BA%AE%E4%BB%A3%E8%A1%A8%E6%88%91%E7%9A%84%E5%BF%83%20-%20%20Teresa%20Teng%20%E9%82%93%E4%B8%BD%E5%90%9B%20%28Lyric%20%2B%20Pinyin%29.mp3" autoplay muted loop playsinline preload="auto"></audio>
+  <script>
+    (function () {
+      var a = document.getElementById('bgMusic');
+      if (!a) return;
+      a.muted = true;
+      a.volume = 0;
+      try { var p = a.play(); if (p && p.catch) p.catch(function () {}); } catch (e) {}
+    })();
+  </script>
   <!-- ============ LOADER : TAMAN KEKISARAN — PAGODA · PLUM · KELOPAK SAKURA ============ -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
@@ -481,12 +491,14 @@
         <ellipse class="ld7-gate-glow" cx="170" cy="293" rx="40" ry="50" fill="url(#ld7-gate-light)"/>
         <g class="ld7-gate-door ld7-gate-door--l">
           <path d="M 155 314 L 155 280 Q 155 266 170 266 L 170 314 Z" fill="#3A2B22" stroke="#2E1A12" stroke-width="1.2" stroke-linejoin="round"/>
+          <ellipse class="ld7-gate-leaf-glow" cx="168" cy="293" rx="9" ry="26" fill="url(#ld7-gate-light)"/>
           <circle cx="160" cy="288" r="1.15" fill="#C9A159" opacity=".85"/>
           <circle cx="160" cy="300" r="1.15" fill="#C9A159" opacity=".85"/>
           <circle cx="165.4" cy="293" r="2.3" fill="none" stroke="#C9A159" stroke-width=".9" opacity=".9"/>
         </g>
         <g class="ld7-gate-door ld7-gate-door--r">
           <path d="M 185 314 L 185 280 Q 185 266 170 266 L 170 314 Z" fill="#3A2B22" stroke="#2E1A12" stroke-width="1.2" stroke-linejoin="round"/>
+          <ellipse class="ld7-gate-leaf-glow" cx="172" cy="293" rx="9" ry="26" fill="url(#ld7-gate-light)"/>
           <circle cx="180" cy="288" r="1.15" fill="#C9A159" opacity=".85"/>
           <circle cx="180" cy="300" r="1.15" fill="#C9A159" opacity=".85"/>
           <circle cx="174.6" cy="293" r="2.3" fill="none" stroke="#C9A159" stroke-width=".9" opacity=".9"/>
@@ -987,12 +999,14 @@
         <ellipse class="ld7-gate-glow" cx="170" cy="293" rx="40" ry="50" fill="url(#ld7-gate-light)"/>
         <g class="ld7-gate-door ld7-gate-door--l">
           <path d="M 155 314 L 155 280 Q 155 266 170 266 L 170 314 Z" fill="#3A2B22" stroke="#2E1A12" stroke-width="1.2" stroke-linejoin="round"/>
+          <ellipse class="ld7-gate-leaf-glow" cx="168" cy="293" rx="9" ry="26" fill="url(#ld7-gate-light)"/>
           <circle cx="160" cy="288" r="1.15" fill="#C9A159" opacity=".85"/>
           <circle cx="160" cy="300" r="1.15" fill="#C9A159" opacity=".85"/>
           <circle cx="165.4" cy="293" r="2.3" fill="none" stroke="#C9A159" stroke-width=".9" opacity=".9"/>
         </g>
         <g class="ld7-gate-door ld7-gate-door--r">
           <path d="M 185 314 L 185 280 Q 185 266 170 266 L 170 314 Z" fill="#3A2B22" stroke="#2E1A12" stroke-width="1.2" stroke-linejoin="round"/>
+          <ellipse class="ld7-gate-leaf-glow" cx="172" cy="293" rx="9" ry="26" fill="url(#ld7-gate-light)"/>
           <circle cx="180" cy="288" r="1.15" fill="#C9A159" opacity=".85"/>
           <circle cx="180" cy="300" r="1.15" fill="#C9A159" opacity=".85"/>
           <circle cx="174.6" cy="293" r="2.3" fill="none" stroke="#C9A159" stroke-width=".9" opacity=".9"/>

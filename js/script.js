@@ -355,26 +355,99 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 4000);
   });
 
-  /* ========== MUSIC TOGGLE ========== */
+  /* ========== MUSIC — mulai sejak loader, fade in / fade out ========== */
   const musicBtn = document.getElementById('musicToggle');
-  const audio = new Audio('assets/music.mp3');
+  const MUSIC_VOL = 0.3;
+  const audio = document.getElementById('bgMusic');
   audio.loop = true;
-  audio.volume = 0.3;
+  if (audio.paused) {
+    audio.volume = 0;
+    audio.muted = true;
+  }
   let isMusicPlaying = false;
+  let fadeTimer = 0;
+
+  function fadeVolume(to, duration, done) {
+    window.clearInterval(fadeTimer);
+    const from = audio.volume;
+    const t0 = Date.now();
+    fadeTimer = window.setInterval(() => {
+      const p = Math.min(1, (Date.now() - t0) / duration);
+      audio.volume = Math.max(0, Math.min(1, from + (to - from) * p));
+      if (p >= 1) {
+        window.clearInterval(fadeTimer);
+        if (done) done();
+      }
+    }, 40);
+  }
+
+  function audible() {
+    if (!audio.muted) return;
+    audio.muted = false;
+    fadeVolume(MUSIC_VOL, 2500);
+    musicBtn.classList.remove('paused');
+  }
+
+  function startMusic() {
+    if (isMusicPlaying && !audio.paused) return;
+    const alreadyPlaying = !audio.paused;
+    isMusicPlaying = true;
+    if (!alreadyPlaying) {
+      audio.volume = 0;
+      audio.muted = true;
+    }
+    let played = null;
+    if (alreadyPlaying) {
+      played = Promise.resolve();
+    } else {
+      try { played = audio.play(); } catch (e) { played = null; }
+    }
+    if (played && typeof played.then === 'function') {
+      played.then(() => { if (isMusicPlaying) audible(); })
+            .catch(() => {
+              isMusicPlaying = false;
+              musicBtn.classList.add('paused');
+            });
+    } else if (!audio.paused) {
+      audible();
+    }
+  }
+
+  function stopMusic() {
+    if (!isMusicPlaying) return;
+    isMusicPlaying = false;
+    musicBtn.classList.add('paused');
+    fadeVolume(0, 800, () => {
+      if (!isMusicPlaying) audio.pause();
+    });
+  }
 
   function toggleMusic() {
-    if (isMusicPlaying) {
-      audio.pause();
-      musicBtn.classList.add('paused');
-    } else {
-      audio.currentTime = 0;
-      audio.play().catch(() => {});
-      musicBtn.classList.remove('paused');
-    }
-    isMusicPlaying = !isMusicPlaying;
+    if (isMusicPlaying) stopMusic();
+    else startMusic();
   }
 
   musicBtn.addEventListener('click', toggleMusic);
+  audio.addEventListener('play', audible);
+
+  // langsung coba saat halaman siap; browser yang melarang autoplay akan
+  // tetap mencoba lagi pada interaksi pertama sampai benar-benar berbunyi
+  startMusic();
+  ['canplay', 'loadeddata', 'pageshow'].forEach(ev => {
+    window.addEventListener(ev, () => {
+      if (!isMusicPlaying || audio.paused) startMusic();
+    });
+  });
+  const GESTURES = ['pointerdown', 'touchstart', 'keydown'];
+  const onGesture = (e) => {
+    if (e && e.target && e.target.closest && e.target.closest('#musicToggle')) return;
+    if (!isMusicPlaying || audio.paused) startMusic();
+    if (isMusicPlaying && !audio.paused) {
+      GESTURES.forEach(ev => window.removeEventListener(ev, onGesture));
+    }
+  };
+  GESTURES.forEach(ev => window.addEventListener(ev, onGesture, { passive: true }));
+  window.addEventListener('pagehide', () => { if (isMusicPlaying) stopMusic(); });
 
   /* ========== DRESS CODE COPY ========== */
   document.querySelectorAll('.dress-color').forEach(el => {
