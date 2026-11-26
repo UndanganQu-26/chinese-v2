@@ -1448,7 +1448,7 @@ button {
   z-index: 3;
   max-width: 860px;
   width: 100%;
-  padding: 110px 30px 60px;
+  padding: 90px 30px;
 }
 
 .hero-greeting {
@@ -3053,7 +3053,7 @@ section[id] {
   }
 
   .hero-content {
-    padding: 120px 24px 60px;
+    padding: 84px 24px;
   }
 
   .gift-packet {
@@ -3789,3 +3789,872 @@ body.loader-done .music-control {
 .ld8-after-branch,
 .ld7-tree,
 .cn-branch { overflow: visible; }
+
+
+/* ============================================================
+   PORT DESIGN — ADAT NUSANTARA → CHINESE V2
+   Timeline panorama + gallery accordion (palet Chinese)
+   ============================================================ */
+.navbar { display: none !important; }
+
+/* Samakan ritme & lebar konten dua bagian ini dengan referensi Adat */
+.story,
+.gallery {
+  padding: 120px 0 100px;
+}
+
+.story .container,
+.gallery .container {
+  max-width: 1200px;
+}
+
+@media (max-width: 480px) {
+  .story,
+  .gallery {
+    padding: 60px 0;
+  }
+
+  .story .container,
+  .gallery .container {
+    padding: 0 30px;
+  }
+}
+
+/* Lightbox caption — sama seperti referensi, warna disesuaikan */
+.modal-content {
+  position: relative;
+  width: min(600px, 90vw, 78vh);
+  max-width: none;
+}
+
+.modal-content::after {
+  content: attr(data-caption);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 46px 20px 18px;
+  background: linear-gradient(180deg, transparent, rgba(18, 3, 6, 0.82));
+  color: var(--gold-light);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* ================================================================
+   GALLERY — INTERACTIVE HORIZONTAL PHOTO ACCORDION
+   ================================================================ */
+.gallery {
+  background:
+    radial-gradient(70% 55% at 50% 0%, rgba(217, 164, 65, 0.09), transparent 62%),
+    #2B0A0E;
+}
+
+.gallery .section-subtitle {
+  color: var(--gold-light);
+}
+
+.gallery .section-title {
+  color: var(--paper);
+}
+
+.gallery .divider-line {
+  background: linear-gradient(90deg, transparent, rgba(217, 164, 65, 0.8));
+}
+
+.gallery .divider-line:last-child {
+  background: linear-gradient(270deg, transparent, rgba(217, 164, 65, 0.8));
+}
+
+.gallery .divider i {
+  color: var(--gold);
+}
+
+.gallery-accordion {
+  --acc-gap: 6px;
+  --panel-w: clamp(180px, 19vw, 320px);
+  --active-w: clamp(420px, 48vw, 760px);
+  position: relative;
+  width: 100vw;
+  margin-top: 6px;
+  margin-left: calc(50% - 50vw);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.gallery-track {
+  display: flex;
+  justify-content: flex-start;
+  gap: var(--acc-gap);
+  width: 100%;
+  height: clamp(380px, 60vh, 580px);
+  background: #1B0508;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(217, 164, 65, 0.1);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gallery-track::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-panel {
+  position: relative;
+  flex: 0 0 var(--panel-w);
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: #3A1016;
+  overflow: hidden;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  outline: none;
+  transition: flex-basis 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: flex-basis;
+}
+
+.gallery-panel.is-active {
+  flex-basis: var(--active-w);
+  z-index: 2;
+}
+
+.gallery-panel__media {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: grayscale(1) brightness(0.72) contrast(1.05);
+  transform: scale(1.04);
+  transition: filter 0.8s ease, transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: filter, transform;
+}
+
+.gallery-panel.is-active .gallery-panel__media {
+  filter: grayscale(0) brightness(1.03) contrast(1);
+  transform: scale(1);
+}
+
+/* Siap untuk foto asli: <img> di dalam media akan memenuhi panel */
+.gallery-panel__media img,
+.modal-img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-panel__shade {
+  position: absolute;
+  inset: 0;
+  background: #140406;
+  opacity: 0.32;
+  transition: opacity 0.8s ease;
+  pointer-events: none;
+}
+
+.gallery-panel.is-active .gallery-panel__shade {
+  opacity: 0.04;
+}
+
+.gallery-panel__content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 70px 22px 22px;
+  background: linear-gradient(180deg, transparent, rgba(18, 3, 6, 0.82));
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease 0.12s, transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) 0.12s;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.gallery-panel.is-active .gallery-panel__content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gallery-panel__index {
+  color: var(--gold-light);
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.gallery-panel__title {
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.gallery-panel__title::before {
+  content: '';
+  display: inline-block;
+  width: 26px;
+  height: 1px;
+  margin-right: 12px;
+  vertical-align: middle;
+  background: rgba(244, 223, 160, 0.7);
+}
+
+.gallery-panel:focus-visible {
+  outline: 2px solid var(--gold-light);
+  outline-offset: -2px;
+  z-index: 3;
+}
+
+.gallery-accordion .gallery-hint {
+  position: relative;
+  z-index: 2;
+  margin: 22px 0 0;
+  padding: 0;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(246, 239, 228, 0.5);
+}
+
+.gallery-accordion .gallery-hint i {
+  margin-right: 6px;
+  color: var(--gold-light);
+}
+
+.gallery-accordion .hint-mobile {
+  display: none;
+}
+
+/* Lightbox: foto memenuhi bingkai */
+.modal-img {
+  background-size: cover;
+  background-position: center;
+}
+
+.modal-content {
+  border-radius: 6px;
+}
+
+/* Touch / small screens — tetap satu barisan accordion, bisa digeser */
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
+  .gallery-accordion {
+    --acc-gap: 4px;
+    --panel-w: clamp(56px, 18vw, 92px);
+    --active-w: clamp(220px, 74%, 520px);
+  }
+
+  .gallery-track {
+    height: clamp(340px, 60vh, 500px);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .gallery-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery-panel,
+  .gallery-panel.is-active {
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+
+  .gallery-panel {
+    flex-basis: var(--panel-w);
+    transition: flex-basis 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+    will-change: flex-basis;
+  }
+
+  .gallery-panel.is-active {
+    flex-basis: var(--active-w);
+  }
+
+  .gallery-panel__content {
+    gap: 9px;
+    padding: 60px 16px 18px;
+  }
+
+  .gallery-panel__index {
+    font-size: 12px;
+  }
+
+  .gallery-panel__title {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+  }
+
+  .gallery-panel__title::before {
+    width: 18px;
+    margin-right: 9px;
+  }
+
+  .gallery-accordion .hint-desktop {
+    display: none;
+  }
+
+  .gallery-accordion .hint-mobile {
+    display: inline;
+  }
+
+  .gallery-accordion .gallery-hint {
+    margin-top: 18px;
+    padding: 0 10px;
+    font-size: 9px;
+    line-height: 1.7;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-panel,
+  .gallery-panel__media,
+  .gallery-panel__shade,
+  .gallery-panel__content {
+    transition: none !important;
+  }
+}
+
+/* ================================================================
+   GALLERY — ARROW NAVIGATION (visible on desktop AND mobile)
+   ================================================================ */
+.gallery-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(6, 5, 5, 0.52);
+  color: var(--gold-light);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+}
+
+.gallery-arrow::before {
+  content: '';
+  display: block;
+  width: 15px;
+  height: 15px;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  transition: transform 0.3s ease;
+}
+
+.gallery-arrow--left::before { transform: rotate(-135deg); }
+.gallery-arrow--right::before { transform: rotate(45deg); }
+
+.gallery-arrow:hover {
+  background: rgba(217, 164, 65, 0.92);
+  color: var(--ink);
+  transform: translateY(-50%) scale(1.06);
+}
+
+.gallery-arrow:focus-visible {
+  outline: 2px solid var(--gold-light);
+  outline-offset: 2px;
+}
+
+.gallery-arrow[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.gallery-arrow--left { left: 10px; }
+.gallery-arrow--right { right: 10px; }
+
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
+  .gallery-arrow {
+    width: 42px;
+    height: 42px;
+    background: rgba(6, 5, 5, 0.66);
+  }
+  .gallery-arrow--left { left: 6px; }
+  .gallery-arrow--right { right: 6px; }
+}
+
+/* ================================================================
+   LOVE STORY — CINEMATIC HORIZONTAL PANORAMA JOURNEY
+   ================================================================ */
+.story {
+  background: linear-gradient(180deg, rgba(43, 10, 14, 0.18) 0%, rgba(92, 14, 22, 0.34) 100%);
+  overflow: hidden;
+}
+
+.journey {
+  --stop-w: clamp(300px, 30vw, 400px);
+  --journey-h: clamp(520px, 66vh, 640px);
+  --line-gold: rgba(217, 164, 65, 0.55);
+  position: relative;
+  margin-top: 8px;
+  /* Frame removed — timeline transparan, menyatu dengan background halaman */
+  background: transparent;
+  /* overflow: hidden removed — previously clipped the ornament layer */
+  isolation: isolate;
+}
+
+/* Batik watermark + vignette for cinematic depth — made transparent for seamless design */
+.journey::before,
+.journey::after {
+  display: none;
+}
+
+/* Slow-drifting ornament layer (parallax depth) — subtle, seamless */
+.journey-ornament {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -10%;
+  width: 130%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 60% at 22% 40%, rgba(217, 164, 65, 0.04), transparent 70%),
+    radial-gradient(30% 50% at 72% 62%, rgba(176, 30, 40, 0.06), transparent 70%);
+  will-change: transform;
+}
+
+.journey-viewport {
+  position: relative;
+  z-index: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+  outline: none;
+}
+
+.journey-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.journey-viewport.is-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
+}
+
+.journey-viewport:focus-visible {
+  box-shadow: inset 0 0 0 2px rgba(244, 223, 160, 0.6);
+}
+
+.journey-track {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  width: fit-content;
+  min-height: var(--journey-h);
+  padding: 24px 40px;
+}
+
+/* The continuous horizontal journey line */
+.journey-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, transparent 0, var(--line-gold) 5%, var(--line-gold) 95%, transparent 100%);
+  box-shadow: 0 0 18px rgba(217, 164, 65, 0.35);
+}
+
+.journey-stop {
+  position: relative;
+  flex: 0 0 var(--stop-w);
+  display: grid;
+  grid-template-rows: 1fr auto 1fr;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.journey-stop:nth-of-type(even) {
+  transform: translateY(-28px);
+}
+
+.journey-stop.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.journey-half {
+  position: relative;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.journey-half--top {
+  justify-content: flex-end;
+}
+
+.journey-half--bottom {
+  justify-content: flex-start;
+}
+
+.journey-half--empty {
+  justify-content: center;
+}
+
+.journey-node {
+  position: relative;
+  z-index: 2;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.journey-dot {
+  width: 14px;
+  height: 14px;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  transform: rotate(45deg);
+  border-radius: 3px;
+  box-shadow: 0 0 0 4px rgba(217, 164, 65, 0.18), 0 0 22px rgba(217, 164, 65, 0.55);
+}
+
+.journey-node::before {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(217, 164, 65, 0.4);
+  transform: rotate(45deg);
+  border-radius: 6px;
+}
+
+.journey-stem {
+  width: 1px;
+  height: 30px;
+  background: linear-gradient(180deg, rgba(217, 164, 65, 0.05), var(--line-gold));
+}
+
+.journey-half--bottom .journey-stem {
+  background: linear-gradient(180deg, var(--line-gold), rgba(217, 164, 65, 0.05));
+}
+
+.journey-card {
+  width: min(100%, 300px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.journey-card--flip {
+  flex-direction: column-reverse;
+}
+
+.journey-photo {
+  --ph-h: 140px;
+  --ph-w: 78%;
+  position: relative;
+  width: var(--ph-w);
+  height: var(--ph-h);
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  overflow: hidden;
+  will-change: transform;
+}
+
+.journey-photo--tall { --ph-h: 140px; --ph-w: 60%; }
+.journey-photo--wide { --ph-h: 112px; --ph-w: 100%; }
+.journey-photo--square { --ph-h: 132px; --ph-w: 72%; }
+
+.journey-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.5));
+}
+
+.journey-photo::after {
+  content: none;
+}
+
+.journey-info {
+  will-change: transform;
+}
+
+.journey-date {
+  display: block;
+  font-family: var(--font-cn2);
+  font-size: 26px;
+  line-height: 1;
+  color: var(--paper);
+  margin-bottom: 6px;
+  text-shadow: 0 0 24px rgba(217, 164, 65, 0.4);
+}
+
+.journey-title {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--paper);
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+}
+
+.journey-title::after {
+  content: '';
+  display: block;
+  width: 42px;
+  height: 1px;
+  margin: 10px auto 0;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.journey-desc {
+  font-size: 13px;
+  line-height: 1.75;
+  color: rgba(251, 243, 228, 0.72);
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.journey-ghost {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(48px, 6vw, 88px);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+  user-select: none;
+  pointer-events: none;
+}
+
+.journey-ghost--top { top: 2px; }
+.journey-ghost--bottom { bottom: 2px; }
+
+/* Controls */
+.journey-controls {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 22px 6px;
+}
+
+.journey-arrow {
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--gold);
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+  line-height: 1;
+}
+
+.journey-arrow:hover {
+  color: var(--gold-light);
+  transform: translateY(-1px);
+}
+
+.journey-arrow:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.journey-arrow[aria-disabled="true"] {
+  opacity: 0.4;
+  cursor: default;
+  transform: none;
+}
+
+/* Arrow decorative shape — minimalis antar pernikahan (pure CSS, no CDN) */
+.journey-arrow i {
+  display: block;
+  width: 22px;
+  height: 22px;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  transition: transform 0.3s ease;
+}
+
+#journeyPrev i { transform: rotate(-135deg); }
+#journeyNext i { transform: rotate(45deg); }
+
+/* Icon geser kiri-kanan pada teks petunjuk (pure CSS) */
+.journey-hint__swipe {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-right: 8px;
+  vertical-align: middle;
+  color: var(--gold);
+}
+.journey-hint__swipe::before,
+.journey-hint__swipe::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+}
+.journey-hint__swipe::before { transform: rotate(-135deg); }
+.journey-hint__swipe::after { transform: rotate(45deg); }
+
+.journey-progress {
+  flex: 1 1 auto;
+  height: 2px;
+  background: rgba(217, 164, 65, 0.18);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.journey-progress-bar {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  box-shadow: 0 0 12px rgba(217, 164, 65, 0.6);
+  transition: width 0.15s linear;
+}
+
+.journey-hint {
+  position: relative;
+  z-index: 4;
+  margin: 0;
+  padding: 8px 22px 18px;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(251, 243, 228, 0.72);
+}
+
+.journey-hint i {
+  margin-right: 6px;
+  color: var(--gold-light);
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .journey {
+    --stop-w: clamp(280px, 40vw, 360px);
+    --journey-h: clamp(520px, 68vh, 640px);
+  }
+
+  .journey-track {
+    padding: 38px 48px;
+  }
+}
+
+/* Mobile — comfortable horizontal swipe */
+@media (max-width: 768px) {
+  .journey {
+    --stop-w: clamp(250px, 80vw, 320px);
+    --journey-h: clamp(480px, 66vh, 560px);
+    /* Full-bleed: hilangkan gutter 30px dari .container agar tidak ada white space */
+    margin-left: -30px;
+    margin-right: -30px;
+    border-radius: 0;
+  }
+
+  .journey-track {
+    padding: 24px 18px;
+  }
+
+  .journey-card {
+    width: min(100%, 260px);
+    gap: 10px;
+  }
+
+  .journey-photo { --ph-h: 104px; --ph-w: 74%; }
+  .journey-photo--tall { --ph-h: 116px; --ph-w: 56%; }
+  .journey-photo--wide { --ph-h: 84px; --ph-w: 100%; }
+  .journey-photo--square { --ph-h: 96px; --ph-w: 66%; }
+
+  .journey-date { font-size: 22px; }
+  .journey-title { font-size: 19px; }
+  .journey-desc { font-size: 12px; max-width: 240px; }
+  .journey-ghost { font-size: clamp(40px, 12vw, 64px); }
+  .journey-stem { height: 22px; }
+  .journey-node { height: 26px; }
+
+  .journey-controls { padding: 12px 16px 4px; gap: 12px; }
+  .journey-arrow { width: 36px; height: 36px; font-size: 12px; }
+  .journey-hint { padding: 6px 16px 14px; font-size: 9px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .journey-viewport { scroll-behavior: auto; }
+  .journey-stop { opacity: 1; transform: none; transition: none; }
+  .journey-photo, .journey-info, .journey-ornament { transform: none !important; }
+}
+
+/* ---------------------------------------------------------------
+   5) JOURNEY — ornamen non-arsitektur mengisi panel timeline
+   --------------------------------------------------------------- */
+.journey-motif {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(217, 164, 65, 0.26), transparent 58%),
+    repeating-linear-gradient(45deg, rgba(217, 164, 65, 0.12) 0 1px, transparent 1px 16px),
+    repeating-linear-gradient(-45deg, rgba(176, 30, 40, 0.1) 0 1px, transparent 1px 16px),
+    linear-gradient(180deg, rgba(251, 243, 228, 0.55), rgba(217, 164, 65, 0.2));
+  border: 1px solid rgba(217, 164, 65, 0.42);
+  box-shadow: inset 0 0 28px rgba(176, 30, 40, 0.12);
+}

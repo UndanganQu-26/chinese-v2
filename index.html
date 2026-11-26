@@ -4205,24 +4205,6 @@
     <i class="fas fa-music"></i>
   </div>
 
-  <!-- ============ NAVBAR ============ -->
-  <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="#home" class="nav-logo"><span class="logo-seal">囍</span> A &amp; A</a>
-      <div class="nav-toggle" id="navToggle">
-        <span></span><span></span><span></span>
-      </div>
-      <div class="nav-menu" id="navMenu"><button type="button" class="nav-close" id="navClose" aria-label="Tutup menu"><i class="fas fa-times"></i></button>
-        <a href="#home" class="nav-link active">Home</a>
-        <a href="#couple" class="nav-link">Couple</a>
-        <a href="#story" class="nav-link">Story</a>
-        <a href="#events" class="nav-link">Events</a>
-        <a href="#gallery" class="nav-link">Gallery</a>
-        <a href="#rsvp" class="nav-link">RSVP</a>
-      </div>
-    </div>
-  </nav>
-
   <!-- ============ BACKGROUND LIVE : PEMANDANGAN TINTA + PARALLAX ============ -->
   <div class="cn-bg" id="cnBg" aria-hidden="true">
     <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -4648,38 +4630,78 @@
   </section>
 
   <!-- ============ STORY ============ -->
-  <section class="section" id="story">
+  <section class="section story" id="story">
     <div class="container">
       <div class="section-header reveal">
         <p class="section-subtitle">Love Story</p>
         <h2 class="section-title">Perjalanan Cinta</h2>
         <div class="divider"><i>囍</i></div>
       </div>
-      <div class="timeline">
-        <div class="timeline-item reveal">
-          <div class="timeline-dot"><span>囍</span></div>
-          <div class="timeline-content">
-            <span class="timeline-date">2019</span>
-            <h3>Pertemuan Pertama</h3>
-            <p>Berawal dari sebuah acara seminar, kami bertemu dan mulai saling mengenal satu sama lain.</p>
+      <div class="journey" id="journey">
+        <span class="journey-ornament" aria-hidden="true"></span>
+        <div class="journey-viewport" id="journeyViewport" tabindex="0" role="region" aria-label="Perjalanan cinta, geser horizontal untuk menjelajahi">
+          <div class="journey-track" id="journeyTrack">
+            <span class="journey-line" aria-hidden="true"></span>
+
+            <article class="journey-stop">
+              <div class="journey-half journey-half--top">
+                <span class="journey-ghost journey-ghost--top" aria-hidden="true">2019</span>
+                <span class="journey-stem" aria-hidden="true"></span>
+              </div>
+              <div class="journey-node" aria-hidden="true"><span class="journey-dot"></span></div>
+              <div class="journey-half journey-half--bottom">
+                <span class="journey-stem" aria-hidden="true"></span>
+                <div class="journey-info">
+                  <span class="journey-date">2019</span>
+                  <h3 class="journey-title">Pertemuan Pertama</h3>
+                  <p class="journey-desc">Berawal dari sebuah acara seminar, kami bertemu dan mulai saling mengenal satu sama lain.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="journey-stop">
+              <div class="journey-half journey-half--top">
+                <div class="journey-info">
+                  <span class="journey-date">2021</span>
+                  <h3 class="journey-title">Menjadi Serius</h3>
+                  <p class="journey-desc">Setelah dua tahun bersama, kami memutuskan untuk melangkah ke jenjang yang lebih serius.</p>
+                </div>
+                <span class="journey-stem" aria-hidden="true"></span>
+              </div>
+              <div class="journey-node" aria-hidden="true"><span class="journey-dot"></span></div>
+              <div class="journey-half journey-half--bottom">
+                <span class="journey-stem" aria-hidden="true"></span>
+                <figure class="journey-photo journey-photo--wide" aria-hidden="true">
+                  <span class="journey-motif"></span>
+                </figure>
+                <span class="journey-ghost journey-ghost--bottom" aria-hidden="true">2021</span>
+              </div>
+            </article>
+
+            <article class="journey-stop">
+              <div class="journey-half journey-half--top">
+                <span class="journey-ghost journey-ghost--top" aria-hidden="true">2027</span>
+                <span class="journey-stem" aria-hidden="true"></span>
+              </div>
+              <div class="journey-node" aria-hidden="true"><span class="journey-dot"></span></div>
+              <div class="journey-half journey-half--bottom">
+                <span class="journey-stem" aria-hidden="true"></span>
+                <div class="journey-info">
+                  <span class="journey-date">2027</span>
+                  <h3 class="journey-title">Pernikahan</h3>
+                  <p class="journey-desc">Dan akhirnya, dengan izin Allah, kami akan melangsungkan pernikahan pada 00 Bulan 0000.</p>
+                </div>
+              </div>
+            </article>
+
           </div>
         </div>
-        <div class="timeline-item reveal">
-          <div class="timeline-dot"><span>囍</span></div>
-          <div class="timeline-content">
-            <span class="timeline-date">2021</span>
-            <h3>Menjadi Serius</h3>
-            <p>Setelah dua tahun bersama, kami memutuskan untuk melangkah ke jenjang yang lebih serius.</p>
-          </div>
+        <div class="journey-controls">
+          <button type="button" class="journey-arrow" id="journeyPrev" aria-label="Momen sebelumnya"><i aria-hidden="true"></i></button>
+          <div class="journey-progress" aria-hidden="true"><span class="journey-progress-bar" id="journeyProgressBar"></span></div>
+          <button type="button" class="journey-arrow" id="journeyNext" aria-label="Momen berikutnya"><i aria-hidden="true"></i></button>
         </div>
-        <div class="timeline-item reveal">
-          <div class="timeline-dot"><span>囍</span></div>
-          <div class="timeline-content">
-            <span class="timeline-date">2027</span>
-            <h3>Pernikahan</h3>
-            <p>Dan akhirnya, dengan izin Allah, kami akan melangsungkan pernikahan pada 00 Bulan 0000.</p>
-          </div>
-        </div>
+        <p class="journey-hint"><span class="journey-hint__swipe" aria-hidden="true"></span> Geser, seret, atau gunakan panah untuk menjelajahi perjalanan</p>
       </div>
     </div>
   </section>
@@ -4747,20 +4769,70 @@
   </section>
 
   <!-- ============ GALLERY ============ -->
-  <section class="section" id="gallery">
+  <section class="section gallery" id="gallery">
     <div class="container">
       <div class="section-header reveal">
         <p class="section-subtitle">Gallery</p>
         <h2 class="section-title">Galeri Foto</h2>
         <div class="divider"><i>囍</i></div>
       </div>
-      <div class="gallery-grid">
-        <div class="gallery-item" data-height="tall" data-caption="Prewedding"><div class="gallery-img" style="background: linear-gradient(135deg, #A61E2B, #E6C36A);"><i class="fas fa-camera"></i></div></div>
-        <div class="gallery-item" data-height="short" data-caption="Akad"><div class="gallery-img" style="background: linear-gradient(135deg, #7E0F18, #D9A441);"><i class="fas fa-camera"></i></div></div>
-        <div class="gallery-item" data-height="tall" data-caption="Resepsi"><div class="gallery-img" style="background: linear-gradient(135deg, #B01E28, #F4DFA0);"><i class="fas fa-camera"></i></div></div>
-        <div class="gallery-item" data-height="short" data-caption="Honeymoon"><div class="gallery-img" style="background: linear-gradient(135deg, #8C1420, #C89B3C);"><i class="fas fa-camera"></i></div></div>
-        <div class="gallery-item" data-height="short" data-caption="Family"><div class="gallery-img" style="background: linear-gradient(135deg, #D9A441, #7E0F18);"><i class="fas fa-camera"></i></div></div>
-        <div class="gallery-item" data-height="tall" data-caption="Friends"><div class="gallery-img" style="background: linear-gradient(135deg, #E6C36A, #A61E2B);"><i class="fas fa-camera"></i></div></div>
+      <div class="gallery-accordion reveal" id="galleryAccordion">
+        <div class="gallery-track" id="galleryTrack">
+        <button type="button" class="gallery-panel is-active" data-caption="Prewedding" aria-label="Foto Prewedding" aria-pressed="true">
+          <span class="gallery-panel__media" style="background: radial-gradient(70% 80% at 65% 30%, rgba(244, 223, 160, 0.4), transparent 60%), linear-gradient(135deg, #A61E2B, #E6C36A);" aria-hidden="true"></span>
+          <span class="gallery-panel__shade" aria-hidden="true"></span>
+          <span class="gallery-panel__content" aria-hidden="true">
+            <span class="gallery-panel__index">01</span>
+            <span class="gallery-panel__title">Prewedding</span>
+          </span>
+        </button>
+        <button type="button" class="gallery-panel" data-caption="Akad" aria-label="Foto Akad" aria-pressed="false">
+          <span class="gallery-panel__media" style="background: radial-gradient(65% 70% at 35% 25%, rgba(251, 243, 228, 0.32), transparent 58%), linear-gradient(135deg, #7E0F18, #D9A441);" aria-hidden="true"></span>
+          <span class="gallery-panel__shade" aria-hidden="true"></span>
+          <span class="gallery-panel__content" aria-hidden="true">
+            <span class="gallery-panel__index">02</span>
+            <span class="gallery-panel__title">Akad</span>
+          </span>
+        </button>
+        <button type="button" class="gallery-panel" data-caption="Resepsi" aria-label="Foto Resepsi" aria-pressed="false">
+          <span class="gallery-panel__media" style="background: radial-gradient(75% 75% at 50% 20%, rgba(244, 223, 160, 0.34), transparent 60%), linear-gradient(160deg, #B01E28, #F4DFA0);" aria-hidden="true"></span>
+          <span class="gallery-panel__shade" aria-hidden="true"></span>
+          <span class="gallery-panel__content" aria-hidden="true">
+            <span class="gallery-panel__index">03</span>
+            <span class="gallery-panel__title">Resepsi</span>
+          </span>
+        </button>
+        <button type="button" class="gallery-panel" data-caption="Honeymoon" aria-label="Foto Honeymoon" aria-pressed="false">
+          <span class="gallery-panel__media" style="background: radial-gradient(60% 75% at 70% 20%, rgba(217, 164, 65, 0.3), transparent 62%), linear-gradient(150deg, #8C1420, #C89B3C);" aria-hidden="true"></span>
+          <span class="gallery-panel__shade" aria-hidden="true"></span>
+          <span class="gallery-panel__content" aria-hidden="true">
+            <span class="gallery-panel__index">04</span>
+            <span class="gallery-panel__title">Honeymoon</span>
+          </span>
+        </button>
+        <button type="button" class="gallery-panel" data-caption="Family" aria-label="Foto Family" aria-pressed="false">
+          <span class="gallery-panel__media" style="background: radial-gradient(65% 70% at 30% 30%, rgba(251, 243, 228, 0.36), transparent 60%), linear-gradient(140deg, #D9A441, #7E0F18);" aria-hidden="true"></span>
+          <span class="gallery-panel__shade" aria-hidden="true"></span>
+          <span class="gallery-panel__content" aria-hidden="true">
+            <span class="gallery-panel__index">05</span>
+            <span class="gallery-panel__title">Family</span>
+          </span>
+        </button>
+        <button type="button" class="gallery-panel" data-caption="Friends" aria-label="Foto Friends" aria-pressed="false">
+          <span class="gallery-panel__media" style="background: radial-gradient(75% 80% at 50% 25%, rgba(176, 30, 40, 0.34), transparent 62%), linear-gradient(135deg, #E6C36A, #A61E2B);" aria-hidden="true"></span>
+          <span class="gallery-panel__shade" aria-hidden="true"></span>
+          <span class="gallery-panel__content" aria-hidden="true">
+            <span class="gallery-panel__index">06</span>
+            <span class="gallery-panel__title">Friends</span>
+          </span>
+        </button>
+        </div>
+        <button type="button" class="gallery-arrow gallery-arrow--left" aria-label="Foto sebelumnya" id="galleryPrev"><i aria-hidden="true"></i></button>
+        <button type="button" class="gallery-arrow gallery-arrow--right" aria-label="Foto berikutnya" id="galleryNext"><i aria-hidden="true"></i></button>
+        <p class="gallery-hint">
+          <span class="hint-desktop"><i class="fas fa-arrows-left-right"></i> Arahkan kursor untuk memilih &middot; klik foto untuk memperbesar</span>
+          <span class="hint-mobile"><i class="fas fa-hand-pointer"></i> Ketuk untuk memilih &middot; ketuk lagi untuk memperbesar</span>
+        </p>
       </div>
     </div>
   </section>

@@ -150,49 +150,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })();
 
-  /* ========== NAVBAR ========== */
-  const navbar = document.querySelector('.navbar');
-  const navToggle = document.getElementById('navToggle');
-  const navMenu = document.getElementById('navMenu');
-  const navLinks = document.querySelectorAll('.nav-link');
-
-  navToggle.addEventListener('click', () => {
-    if (!loaderHidden) return;
-    navToggle.classList.toggle('active');
-    navMenu.classList.toggle('active');
-  });
-
-  navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      if (!loaderHidden) return;
-      e.preventDefault();
-      navToggle.classList.remove('active');
-      navMenu.classList.remove('active');
-      const target = document.querySelector(link.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  });
-
-  function updateActiveLink() {
-    const sections = document.querySelectorAll('section[id]');
-    let current = '';
-    sections.forEach(section => {
-      const top = section.offsetTop - 150;
-      if (window.scrollY >= top) {
-        current = section.getAttribute('id');
-      }
-    });
-    navLinks.forEach(link => {
-      link.classList.toggle('active', link.getAttribute('href') === '#' + current);
-    });
-  }
-
   /* ========== PARALLAX LIVE — SCROLL + MOUSE ========== */
   const bgLayers = document.querySelectorAll('.cn-layer');
-  const navbarEl = document.querySelector('.navbar');
-
   let sy = window.scrollY;
   let scy = window.scrollY;   // nilai scroll yang sudah dihaluskan
   let mx = 0, my = 0;   // target mouse (-0.5 .. 0.5)
@@ -200,8 +159,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.addEventListener('scroll', () => {
     sy = window.scrollY;
-    navbarEl.classList.toggle('scrolled', sy > 80);
-    updateActiveLink();
   }, { passive: true });
 
   window.addEventListener('mousemove', (e) => {
@@ -265,21 +222,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalClose = modal.querySelector('.modal-close');
   const modalPrev = modal.querySelector('.modal-prev');
   const modalNext = modal.querySelector('.modal-next');
-  const galleryItems = document.querySelectorAll('.gallery-item');
+  const galleryItems = Array.from(document.querySelectorAll('.gallery-panel'));
   let currentIndex = 0;
 
-  const gradients = [
-    'linear-gradient(135deg, #A61E2B, #E6C36A)',
-    'linear-gradient(135deg, #7E0F18, #D9A441)',
-    'linear-gradient(135deg, #B01E28, #F4DFA0)',
-    'linear-gradient(135deg, #8C1420, #C89B3C)',
-    'linear-gradient(135deg, #D9A441, #7E0F18)',
-    'linear-gradient(135deg, #E6C36A, #A61E2B)'
-  ];
+  // Sumber gambar/caption diambil langsung dari panel agar modal selalu sinkron.
+  const galleryData = galleryItems.map(item => {
+    const media = item.querySelector('.gallery-panel__media');
+    return {
+      background: media ? (media.style.background || getComputedStyle(media).background) : '',
+      caption: item.dataset.caption || ''
+    };
+  });
+
+  function showSlide(index) {
+    if (!galleryItems.length) return;
+    currentIndex = (index + galleryItems.length) % galleryItems.length;
+    const data = galleryData[currentIndex];
+    modalImg.style.background = data.background;
+    const content = modal.querySelector('.modal-content');
+    if (content) content.dataset.caption = data.caption;
+  }
 
   function openModal(index) {
-    currentIndex = index;
-    modalImg.style.background = gradients[currentIndex];
+    showSlide(index);
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
@@ -290,18 +255,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function prevImage() {
-    currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
-    modalImg.style.background = gradients[currentIndex];
+    showSlide(currentIndex - 1);
   }
 
   function nextImage() {
-    currentIndex = (currentIndex + 1) % galleryItems.length;
-    modalImg.style.background = gradients[currentIndex];
+    showSlide(currentIndex + 1);
   }
-
-  galleryItems.forEach((item, i) => {
-    item.addEventListener('click', () => openModal(i));
-  });
 
   modalClose.addEventListener('click', closeModal);
   modalPrev.addEventListener('click', prevImage);
@@ -315,6 +274,252 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'ArrowLeft') prevImage();
     if (e.key === 'ArrowRight') nextImage();
   });
+
+  /* ========== GALLERY — HORIZONTAL PHOTO ACCORDION ========== */
+  (function galleryAccordion() {
+    const accordion = document.getElementById('galleryAccordion');
+    if (!accordion) return;
+    const track = accordion.querySelector('.gallery-track');
+    const panels = Array.from(accordion.querySelectorAll('.gallery-panel'));
+    if (!track || !panels.length) return;
+
+    const hoverQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const mobileQuery = window.matchMedia('(max-width: 768px), (hover: none) and (pointer: coarse)');
+    const reducedQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    let activeIndex = panels.findIndex(panel => panel.classList.contains('is-active'));
+    if (activeIndex < 0) activeIndex = 0;
+    let hoverTimer = 0;
+    let pendingHover = -1;
+    let keyboardMode = false;
+    let lastPointerType = 'mouse';
+
+    function revealActive(instant) {
+      const styles = getComputedStyle(accordion);
+      const rail = parseFloat(styles.getPropertyValue('--panel-w')) ||
+                   parseFloat(styles.getPropertyValue('--rail-w')) || 62;
+      const gap = parseFloat(styles.getPropertyValue('--acc-gap')) || 6;
+      const left = Math.max(0, activeIndex * (rail + gap) - 16);
+      if (instant || reducedQuery.matches) track.scrollLeft = left;
+      else track.scrollTo({ left, behavior: 'smooth' });
+    }
+
+    function setActive(index, options = {}) {
+      index = (index + panels.length) % panels.length;
+      activeIndex = index;
+      panels.forEach((panel, i) => {
+        const active = i === index;
+        panel.classList.toggle('is-active', active);
+        panel.setAttribute('aria-pressed', String(active));
+        panel.tabIndex = active ? 0 : -1;
+      });
+      if (options.focus) panels[index].focus({ preventScroll: true });
+      if (options.reveal) revealActive(options.instant);
+    }
+
+    function scheduleHover(index) {
+      if (index === activeIndex) return;
+      if (pendingHover === index && hoverTimer) return;
+      clearTimeout(hoverTimer);
+      pendingHover = index;
+      hoverTimer = window.setTimeout(() => {
+        hoverTimer = 0;
+        if (pendingHover === index && index !== activeIndex) setActive(index);
+      }, 70);
+    }
+
+    function cancelHover(index) {
+      if (pendingHover !== index) return;
+      clearTimeout(hoverTimer);
+      hoverTimer = 0;
+      pendingHover = -1;
+    }
+
+    panels.forEach((panel, index) => {
+      panel.addEventListener('pointermove', (event) => {
+        if (!hoverQuery.matches || event.pointerType === 'touch') return;
+        scheduleHover(index);
+      });
+      panel.addEventListener('pointerleave', () => cancelHover(index));
+
+      panel.addEventListener('focus', () => {
+        if (keyboardMode) setActive(index);
+      });
+
+      panel.addEventListener('keydown', (event) => {
+        if (modal.classList.contains('active')) return;
+        const key = event.key;
+        if (key !== 'ArrowRight' && key !== 'ArrowLeft' && key !== 'Home' && key !== 'End') return;
+        event.preventDefault();
+        keyboardMode = true;
+        let next = index;
+        if (key === 'ArrowRight') next = (index + 1) % panels.length;
+        else if (key === 'ArrowLeft') next = (index - 1 + panels.length) % panels.length;
+        else if (key === 'Home') next = 0;
+        else next = panels.length - 1;
+        setActive(next, { focus: true, reveal: true });
+      });
+
+      panel.addEventListener('click', (event) => {
+        const wasActive = index === activeIndex;
+        const touchTap = lastPointerType === 'touch' || lastPointerType === 'pen';
+        setActive(index, { reveal: true });
+        if (touchTap && event.detail > 0 && !wasActive) return;
+        openModal(index);
+      });
+    });
+
+    accordion.addEventListener('pointerdown', (event) => {
+      lastPointerType = event.pointerType || 'mouse';
+      keyboardMode = false;
+    }, true);
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Tab') keyboardMode = true;
+    });
+
+    setActive(activeIndex, { reveal: true, instant: true });
+
+    let resizeTimer = 0;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => revealActive(true), 160);
+    });
+
+    const onLayoutChange = () => revealActive(true);
+    if (mobileQuery.addEventListener) mobileQuery.addEventListener('change', onLayoutChange);
+    else if (mobileQuery.addListener) mobileQuery.addListener(onLayoutChange);
+
+    const galleryPrev = document.getElementById('galleryPrev');
+    const galleryNext = document.getElementById('galleryNext');
+    if (galleryPrev && galleryNext) {
+      galleryNext.addEventListener('click', () => setActive((activeIndex + 1) % panels.length, { focus: true, reveal: true }));
+      galleryPrev.addEventListener('click', () => setActive((activeIndex - 1 + panels.length) % panels.length, { focus: true, reveal: true }));
+    }
+  })();
+
+  /* ========== LOVE STORY — CINEMATIC HORIZONTAL JOURNEY ========== */
+  (function journeyPanorama() {
+    const journey = document.getElementById('journey');
+    if (!journey) return;
+    const viewport = document.getElementById('journeyViewport');
+    const track = document.getElementById('journeyTrack');
+    const stops = Array.from(journey.querySelectorAll('.journey-stop'));
+    const prevBtn = document.getElementById('journeyPrev');
+    const nextBtn = document.getElementById('journeyNext');
+    const bar = document.getElementById('journeyProgressBar');
+    const ornament = journey.querySelector('.journey-ornament');
+    if (!viewport || !track || !stops.length) return;
+
+    const reducedQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const scrollMode = () => (reducedQuery.matches ? 'instant' : 'smooth');
+
+    viewport.querySelectorAll('img').forEach(img => { img.draggable = false; });
+
+    function maxScroll() {
+      return Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+    }
+
+    function stepSize() {
+      return stops[0].getBoundingClientRect().width || viewport.clientWidth * 0.8;
+    }
+
+    function scrollStep(dir) {
+      viewport.scrollBy({ left: dir * stepSize(), behavior: scrollMode() });
+    }
+
+    let raf = 0;
+    function update() {
+      raf = 0;
+      const max = maxScroll();
+      const left = viewport.scrollLeft;
+      if (bar) bar.style.width = (max > 0 ? (left / max) * 100 : 0) + '%';
+      if (prevBtn) prevBtn.setAttribute('aria-disabled', String(left <= 2));
+      if (nextBtn) nextBtn.setAttribute('aria-disabled', String(left >= max - 2));
+
+      if (reducedQuery.matches) return;
+      const vp = viewport.getBoundingClientRect();
+      const center = vp.left + vp.width / 2;
+      stops.forEach(stop => {
+        const r = stop.getBoundingClientRect();
+        const rel = Math.max(-1.5, Math.min(1.5, (r.left + r.width / 2 - center) / vp.width));
+        const photo = stop.querySelector('.journey-photo');
+        const info = stop.querySelector('.journey-info');
+        if (photo) photo.style.transform = 'translateX(' + (rel * -16).toFixed(1) + 'px)';
+        if (info) info.style.transform = 'translateX(' + (rel * 8).toFixed(1) + 'px)';
+      });
+      if (ornament) ornament.style.transform = 'translateX(' + (-left * 0.12).toFixed(1) + 'px)';
+    }
+
+    function requestUpdate() {
+      if (!raf) raf = requestAnimationFrame(update);
+    }
+
+    viewport.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { root: viewport, threshold: 0.25 });
+      stops.forEach(stop => io.observe(stop));
+    } else {
+      stops.forEach(stop => stop.classList.add('is-visible'));
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', () => scrollStep(-1));
+    if (nextBtn) nextBtn.addEventListener('click', () => scrollStep(1));
+
+    viewport.addEventListener('keydown', event => {
+      const key = event.key;
+      if (key === 'ArrowRight') { event.preventDefault(); scrollStep(1); }
+      else if (key === 'ArrowLeft') { event.preventDefault(); scrollStep(-1); }
+      else if (key === 'Home') { event.preventDefault(); viewport.scrollTo({ left: 0, behavior: scrollMode() }); }
+      else if (key === 'End') { event.preventDefault(); viewport.scrollTo({ left: maxScroll(), behavior: scrollMode() }); }
+    });
+
+    viewport.addEventListener('wheel', event => {
+      const delta = Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
+      const max = maxScroll();
+      const atStart = viewport.scrollLeft <= 0;
+      const atEnd = viewport.scrollLeft >= max - 1;
+      if ((delta < 0 && atStart) || (delta > 0 && atEnd)) return;
+      event.preventDefault();
+      viewport.scrollBy({ left: delta, behavior: 'instant' });
+    }, { passive: false });
+
+    let dragging = false;
+    let startX = 0;
+    let startLeft = 0;
+    viewport.addEventListener('pointerdown', event => {
+      if (event.pointerType === 'touch') return;
+      dragging = true;
+      startX = event.clientX;
+      startLeft = viewport.scrollLeft;
+      viewport.classList.add('is-dragging');
+      if (viewport.setPointerCapture) viewport.setPointerCapture(event.pointerId);
+    });
+    viewport.addEventListener('pointermove', event => {
+      if (!dragging) return;
+      viewport.scrollLeft = startLeft - (event.clientX - startX);
+    });
+    function endDrag() {
+      if (!dragging) return;
+      dragging = false;
+      viewport.classList.remove('is-dragging');
+    }
+    viewport.addEventListener('pointerup', endDrag);
+    viewport.addEventListener('pointercancel', endDrag);
+    viewport.addEventListener('pointerleave', endDrag);
+
+    update();
+  })();
+
 
   /* ========== RSVP FORM (WhatsApp) ========== */
   const rsvpForm = document.getElementById('rsvpForm');
