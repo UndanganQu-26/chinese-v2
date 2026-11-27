@@ -37,6 +37,78 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ========== LOADER ASSET GATE — WebP & decode ========== */
+  (function () {
+    if (!loader) return;
+
+    const LATE_AFTER = 2200;
+    const now = () => (window.performance && typeof performance.now === 'function')
+      ? performance.now()
+      : Date.now();
+    const startedAt = now();
+    const birds = loader.querySelectorAll('.cn-perch-bird image');
+    const WEBP_PROBE = 'data:image/webp;base64,UklGRlIAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAIAAAAANFZQOCAqAAAAsAEAnQEqAQABAAFAJiWgAnS6AASqAAD+y7f/gN18W0y/+Zo+832W9DgA';
+
+    function hasWebP() {
+      return new Promise((resolve) => {
+        const probe = new Image();
+        probe.onload = () => resolve(probe.width > 0 && probe.height > 0);
+        probe.onerror = () => resolve(false);
+        probe.src = WEBP_PROBE;
+      });
+    }
+
+    function decodeAsset(src) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        let settled = false;
+        const finish = (ok) => {
+          if (settled) return;
+          settled = true;
+          resolve(ok);
+        };
+        const decoded = () => {
+          if (typeof img.decode === 'function') {
+            img.decode().then(() => finish(true), () => finish(true));
+          } else {
+            finish(true);
+          }
+        };
+        img.onload = decoded;
+        img.onerror = () => finish(false);
+        img.decoding = 'async';
+        img.src = src;
+        if (img.complete) {
+          if (img.naturalWidth > 0) decoded();
+          else finish(false);
+        }
+      });
+    }
+
+    function markReady(kind, scaleVar) {
+      if (now() - startedAt > LATE_AFTER) {
+        loader.style.setProperty(scaleVar, '0.06');
+      }
+      loader.classList.add(kind + '-ready');
+    }
+
+    hasWebP().then((ok) => {
+      const flowerSrc = 'assets/bunga.' + (ok ? 'webp' : 'png');
+      const birdSrc = 'assets/burung.' + (ok ? 'webp' : 'png');
+
+      if (!ok) {
+        birds.forEach((image) => image.setAttribute('href', 'assets/burung.png'));
+      }
+
+      decodeAsset(flowerSrc).then((okDecode) => {
+        if (okDecode) markReady('flower', '--flower-delay-scale');
+      });
+      decodeAsset(birdSrc).then((okDecode) => {
+        if (okDecode) markReady('bird', '--bird-delay-scale');
+      });
+    });
+  })();
+
   /* ========== LOADER PARALLAX POINTER (halus; hanya pointer presisi) ========== */
   (function () {
     if (!loader || reduceMotion) return;

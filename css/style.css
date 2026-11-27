@@ -3586,7 +3586,7 @@ body.loader-done .music-control {
   opacity: var(--fo);
   pointer-events: none;
   backface-visibility: hidden;
-  animation: ld8AssetIn 1.1s cubic-bezier(.22,.61,.36,1) var(--ffd, 2.6s) both;
+  animation: ld8AssetIn 1.1s cubic-bezier(.22,.61,.36,1) calc(var(--ffd, 2.6s) * var(--flower-delay-scale, 1)) both;
 }
 @keyframes ld8AssetIn {
   from { opacity: 0; }
@@ -3658,13 +3658,28 @@ body.loader-done .music-control {
   transform-box: fill-box;
   transform-origin: 50% 100%;
   filter: drop-shadow(0 1px 1px rgba(58, 43, 34, .22));
-  animation: ld8AssetIn 1s cubic-bezier(.22,.61,.36,1) var(--bfd, 3.8s) both,
+  animation: ld8AssetIn 1s cubic-bezier(.22,.61,.36,1) calc(var(--bfd, 3.8s) * var(--bird-delay-scale, 1)) both,
              cnPerchBob var(--pbd, 5s) ease-in-out var(--pbdl, 0s) infinite alternate;
 }
 
 @keyframes cnPerchBob {
   from { transform: rotate(-1.6deg) translateY(0); }
   to   { transform: rotate(1.6deg) translateY(-.8px); }
+}
+
+/* asset foto & burung ditahan dulu sampai gambar benar-benar di-decode */
+#loader:not(.flower-ready) .ld8-photo-flower,
+#loader:not(.bird-ready) .cn-perch-bird {
+  opacity: 0;
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #loader.flower-ready .ld8-photo-flower,
+  #loader.bird-ready .cn-perch-bird {
+    animation: none !important;
+    opacity: var(--fo) !important;
+  }
 }
 
 /* kipas miring, bergoyang — tidak berdiri vertikal */
